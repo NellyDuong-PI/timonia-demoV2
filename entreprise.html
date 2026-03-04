@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timonia Entreprises — Transformez le logement en avantage social</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/entreprise.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="light">
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">T</div>
+        <span class="logo-text">Timonia</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Pour les salariés</a>
+        <a href="entreprise.html" class="nav-link active">Pour les entreprises</a>
+      </div>
+      <div class="nav-right">
+        <button class="btn-theme" id="themeToggle" aria-label="Changer le thème">🌙</button>
+        <a href="dashboard.html" class="btn btn-outline btn-sm">Se connecter</a>
+        <button class="btn btn-teal btn-sm" onclick="openModal('demo')">Demander une démo</button>
+      </div>
+      <button class="nav-burger" id="navBurger">☰</button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="index.html" class="nav-mobile-link">Pour les salariés</a>
+      <a href="entreprise.html" class="nav-mobile-link">Pour les entreprises</a>
+      <a href="dashboard.html" class="nav-mobile-link">Se connecter</a>
+    </div>
+  </nav>
+
+  <!-- HERO ENTREPRISE -->
+  <section class="hero-ent">
+    <div class="hero-glow-teal"></div>
+    <div class="container">
+      <div class="hero-ent-grid">
+        <!-- Texte -->
+        <div class="hero-ent-text">
+          <div class="hero-badge badge-teal">
+            <span class="badge-dot dot-teal"></span>
+            POUR LES ENTREPRISES & DRH
+          </div>
+          <h1 class="hero-title">
+            Transformez le logement en<br />
+            <em class="text-teal">avantage social</em> concret.
+          </h1>
+          <p class="hero-sub">
+            Vos salariés ont des projets immobiliers complexes. Chaque dossier non géré coûte du temps RH,
+            génère du stress et fragilise les mobilités. Timonia règle ça.
+          </p>
+          <div class="hero-btns">
+            <button class="btn btn-teal btn-lg" onclick="openModal('demo')">Demander une démo Veolia →</button>
+            <a href="#offres" class="btn btn-outline btn-lg">Voir les offres</a>
+          </div>
+        </div>
+
+        <!-- Dashboard preview -->
+        <div class="dashboard-preview card">
+          <div class="preview-header">
+            <div>
+              <p class="preview-label">Tableau de bord DRH — Veolia Eau</p>
+              <p class="preview-sub">847 salariés couverts · Contrat actif</p>
+            </div>
+            <span class="live-badge">● Live</span>
+          </div>
+          <div class="preview-kpis">
+            <div class="kpi-card">
+              <p class="kpi-val text-accent">34</p>
+              <p class="kpi-label">Projets actifs</p>
+            </div>
+            <div class="kpi-card">
+              <p class="kpi-val text-teal">12</p>
+              <p class="kpi-label">Mutations en cours</p>
+            </div>
+            <div class="kpi-card">
+              <p class="kpi-val text-green">96%</p>
+              <p class="kpi-label">Satisfaction</p>
+            </div>
+            <div class="kpi-card">
+              <p class="kpi-val text-gold">142k€</p>
+              <p class="kpi-label">Économies RH</p>
+            </div>
+          </div>
+          <div class="preview-rows">
+            <div class="preview-row">
+              <div class="preview-avatar av-teal">TM</div>
+              <div class="preview-info">
+                <p class="preview-name">Thomas Mercier</p>
+                <p class="preview-role">Mobilité Paris→Lyon</p>
+              </div>
+              <div class="preview-bar-wrap">
+                <div class="preview-bar"><div class="preview-fill" style="width:40%;background:var(--teal)"></div></div>
+              </div>
+              <span class="preview-pct text-teal">40%</span>
+            </div>
+            <div class="preview-row">
+              <div class="preview-avatar av-accent">CF</div>
+              <div class="preview-info">
+                <p class="preview-name">Claire Fontaine</p>
+                <p class="preview-role">Acquisition Nantes</p>
+              </div>
+              <div class="preview-bar-wrap">
+                <div class="preview-bar"><div class="preview-fill" style="width:75%;background:var(--accent)"></div></div>
+              </div>
+              <span class="preview-pct text-accent">75%</span>
+            </div>
+            <div class="preview-row">
+              <div class="preview-avatar av-green">MD</div>
+              <div class="preview-info">
+                <p class="preview-name">Marc Durand</p>
+                <p class="preview-role">Rénovation Toulouse</p>
+              </div>
+              <div class="preview-bar-wrap">
+                <div class="preview-bar"><div class="preview-fill" style="width:100%;background:var(--green)"></div></div>
+              </div>
+              <span class="preview-pct text-green">100%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI STATS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label text-teal">L'IMPACT MESURÉ</p>
+        <h2 class="section-title">Ce que vos DRH constatent</h2>
+      </div>
+      <div class="roi-grid">
+        <div class="card roi-card">
+          <span class="roi-icon">⚡</span>
+          <p class="roi-val gradient-text">−34 jours</p>
+          <p class="roi-label">Délai installation collaborateur</p>
+        </div>
+        <div class="card roi-card">
+          <span class="roi-icon">⭐</span>
+          <p class="roi-val gradient-text">96%</p>
+          <p class="roi-label">Satisfaction salariés</p>
+        </div>
+        <div class="card roi-card">
+          <span class="roi-icon">⏱</span>
+          <p class="roi-val gradient-text">12h→45min</p>
+          <p class="roi-label">Temps RH par dossier mutation</p>
+        </div>
+        <div class="card roi-card">
+          <span class="roi-icon">📉</span>
+          <p class="roi-val gradient-text">−18%</p>
+          <p class="roi-label">Turnover lié au logement</p>
+        </div>
+        <div class="card roi-card">
+          <span class="roi-icon">💰</span>
+          <p class="roi-val gradient-text">142 k€</p>
+          <p class="roi-label">Économies RH estimées / an</p>
+        </div>
+        <div class="card roi-card">
+          <span class="roi-icon">🏠</span>
+          <p class="roi-val gradient-text">3 200+</p>
+          <p class="roi-label">Projets accompagnés</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CE QUE VOUS COUVREZ -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label text-teal">CE QUE VOUS OFFREZ À VOS SALARIÉS</p>
+        <h2 class="section-title">Un vrai avantage social, pas une promesse</h2>
+      </div>
+      <div class="coverage-grid">
+        <div class="card coverage-card coverage-covered">
+          <div class="coverage-icon teal-bg">📞</div>
+          <div class="coverage-body">
+            <div class="coverage-title-row">
+              <h3>Premier appel expert offert</h3>
+              <span class="tag tag-teal">✓ Couvert entreprise</span>
+            </div>
+            <p>Chaque salarié accède à un expert immobilier sans rien payer. Valeur : 49 €. Financé par l'abonnement entreprise.</p>
+          </div>
+        </div>
+        <div class="card coverage-card coverage-covered">
+          <div class="coverage-icon teal-bg">🚀</div>
+          <div class="coverage-body">
+            <div class="coverage-title-row">
+              <h3>Accompagnement mobilité complet</h3>
+              <span class="tag tag-teal">✓ Couvert entreprise</span>
+            </div>
+            <p>Recherche, visites, MOBILI-PASS Action Logement — tout pris en charge pour vos mutations. Option Mobilité Pro.</p>
+          </div>
+        </div>
+        <div class="card coverage-card coverage-covered">
+          <div class="coverage-icon teal-bg">📊</div>
+          <div class="coverage-body">
+            <div class="coverage-title-row">
+              <h3>Tableau de bord RH en temps réel</h3>
+              <span class="tag tag-teal">✓ Couvert entreprise</span>
+            </div>
+            <p>Suivez tous les projets de vos collaborateurs, les étapes en cours, les dossiers à valider.</p>
+          </div>
+        </div>
+        <div class="card coverage-card coverage-covered">
+          <div class="coverage-icon teal-bg">✅</div>
+          <div class="coverage-body">
+            <div class="coverage-title-row">
+              <h3>Conformité du parc immobilier</h3>
+              <span class="tag tag-teal">✓ Couvert entreprise</span>
+            </div>
+            <p>Checklist DPE, diagnostics, obligations légales — délégation possible sur chaque tâche.</p>
+          </div>
+        </div>
+        <div class="card coverage-card">
+          <div class="coverage-icon">💰</div>
+          <div class="coverage-body">
+            <div class="coverage-title-row">
+              <h3>Délégation à la carte</h3>
+              <span class="tag">Salarié à la carte</span>
+            </div>
+            <p>Le salarié choisit ce qu'il délègue, avec le coût affiché avant. Payé par le salarié — pas par l'entreprise.</p>
+          </div>
+        </div>
+        <div class="card coverage-card">
+          <div class="coverage-icon">🔧</div>
+          <div class="coverage-body">
+            <div class="coverage-title-row">
+              <h3>Rénovation énergétique</h3>
+              <span class="tag">Salarié à la carte</span>
+            </div>
+            <p>Montage MaPrimeRénov', CEE, suivi chantier. Service à la carte, payé par le salarié.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFRES ENTREPRISE -->
+  <section class="section" id="offres">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label text-accent">OFFRES ENTREPRISE</p>
+        <h2 class="section-title">Simple, transparent, sans surprise</h2>
+        <p class="section-sub">Abonnement annuel par salarié. Pas de commission cachée.</p>
+      </div>
+      <div class="pricing-grid-ent">
+        <div class="plan card">
+          <h3 class="plan-name">Essentiel</h3>
+          <div class="plan-price">
+            <span class="price-amount">69 €</span>
+            <span class="price-period">/salarié/an</span>
+          </div>
+          <ul class="plan-features">
+            <li>Accès plateforme pour tous</li>
+            <li>1er appel expert offert/salarié</li>
+            <li>Tableau de bord RH</li>
+            <li>Support email dédié</li>
+          </ul>
+          <button class="btn btn-outline w-full" onclick="openModal('demo')">Demander une démo →</button>
+        </div>
+        <div class="plan plan-featured card">
+          <div class="plan-badge">Recommandé Veolia</div>
+          <h3 class="plan-name">Mobilité Pro</h3>
+          <div class="plan-price">
+            <span class="price-amount text-accent">89 €</span>
+            <span class="price-period">/salarié/an</span>
+          </div>
+          <ul class="plan-features">
+            <li>Tout Essentiel +</li>
+            <li>Accompagnement mobilité inclus</li>
+            <li>Recherche logement prise en charge</li>
+            <li>Aide MOBILI-PASS Action Logement</li>
+            <li>Reporting mutations en temps réel</li>
+          </ul>
+          <button class="btn btn-primary w-full" onclick="openModal('demo')">Demander une démo →</button>
+        </div>
+        <div class="plan card">
+          <h3 class="plan-name">Premium</h3>
+          <div class="plan-price">
+            <span class="price-amount">Sur devis</span>
+          </div>
+          <ul class="plan-features">
+            <li>Tout Mobilité Pro +</li>
+            <li>Gestion parc immobilier entreprise</li>
+            <li>Conformité DPE flotte logements</li>
+            <li>Account manager dédié</li>
+            <li>Intégration SIRH</li>
+          </ul>
+          <button class="btn btn-outline w-full" onclick="openModal('demo')">Nous contacter →</button>
+        </div>
+      </div>
+      <p class="pricing-note">Tarifs dégressifs à partir de 500 salariés · Facturation annuelle · Intégration SIRH en Premium</p>
+    </div>
+  </section>
+
+  <!-- PARTENAIRES -->
+  <section class="partners-section">
+    <div class="container">
+      <p class="partners-label">Entreprises partenaires</p>
+      <div class="partners-list">
+        <span>Veolia</span><span>EDF</span><span>SNCF</span><span>Orange</span><span>Total Energies</span><span>Engie</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section cta-section-teal">
+    <div class="container text-center">
+      <h2 class="cta-title">Prêt à en parler ?</h2>
+      <p class="cta-sub">Démo personnalisée en 30 min. On vous montre exactement ce que vos collaborateurs verraient — avec vos cas de mobilité réels.</p>
+      <div class="cta-btns">
+        <button class="btn btn-teal btn-lg" onclick="openModal('demo')">Demander une démo →</button>
+        <a href="index.html" class="btn btn-outline btn-lg">Voir la vue salarié</a>
+      </div>
+      <p class="cta-micro">Réponse sous 24h · Sans engagement · Démo sur vos propres cas</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="index.html">Pour les salariés</a>
+        <a href="entreprise.html">Pour les entreprises</a>
+        <a href="dashboard.html">Mon espace</a>
+        <a href="#">Mentions légales</a>
+        <a href="mailto:contact@timonia.fr">contact@timonia.fr</a>
+      </div>
+      <p class="footer-copy">© 2025 Timonia · Partenaire Action Logement certifié</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DEMO -->
+  <div class="modal-bg" id="modalDemo" hidden>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <div class="modal-tag tag-teal">Démo entreprise</div>
+          <h2 class="modal-title">Planifier une démo personnalisée</h2>
+          <p class="modal-sub">30 min · Sur vos propres cas · Sans engagement</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('demo')">✕</button>
+      </div>
+      <form id="formDemo" class="modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Votre nom</label>
+            <input type="text" placeholder="Marie Lefebvre" required />
+          </div>
+          <div class="form-group">
+            <label>Email professionnel</label>
+            <input type="email" placeholder="m.lefebvre@veolia.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Entreprise</label>
+            <input type="text" placeholder="Veolia Eau France" required />
+          </div>
+          <div class="form-group">
+            <label>Nombre de salariés</label>
+            <select>
+              <option value="">Sélectionner…</option>
+              <option>Moins de 100</option>
+              <option>100 — 500</option>
+              <option>500 — 2 000</option>
+              <option>Plus de 2 000</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Votre besoin principal</label>
+          <select>
+            <option value="">Sélectionner…</option>
+            <option>Gestion des mutations / mobilité</option>
+            <option>Avantage social logement</option>
+            <option>Conformité parc immobilier</option>
+            <option>Rénovation énergétique flotte</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-teal w-full">Demander la démo →</button>
+      </form>
+      <div class="form-success" id="successDemo" hidden>
+        <div class="success-icon">🎉</div>
+        <h3>Demande reçue !</h3>
+        <p>Notre équipe commerciale vous contacte sous 24h pour fixer la démo.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/entreprise.js"></script>
+</body>
+</html>
