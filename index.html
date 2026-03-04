@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timonia — Votre projet immobilier simplifié</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/salarie.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="light">
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">T</div>
+        <span class="logo-text">Timonia</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Pour les salariés</a>
+        <a href="entreprise.html" class="nav-link">Pour les entreprises</a>
+      </div>
+      <div class="nav-right">
+        <button class="btn-theme" id="themeToggle" aria-label="Changer le thème">🌙</button>
+        <a href="login.html" class="btn btn-outline btn-sm">Se connecter</a>
+        <button class="btn btn-primary btn-sm" id="openRdvModal">Prendre RDV</button>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="index.html" class="nav-mobile-link">Pour les salariés</a>
+      <a href="entreprise.html" class="nav-mobile-link">Pour les entreprises</a>
+      <a href="login.html" class="nav-mobile-link">Se connecter</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        VOTRE PROJET IMMOBILIER SIMPLIFIÉ
+      </div>
+      <h1 class="hero-title">
+        Louez, Vendez, Achetez ou Rénovez —<br />
+        <em class="text-accent">sans vous noyer</em> dans les démarches.
+      </h1>
+      <p class="hero-sub">
+        Un expert vous accompagne à chaque étape. Vous choisissez ce que vous faites seul,
+        et ce que vous lui déléguez — avec le coût affiché avant.
+      </p>
+
+      <!-- Coverage Checker -->
+      <div class="coverage-box card">
+        <p class="coverage-label">🔍 Mon entreprise est-elle adhérente ?</p>
+        <div class="coverage-row">
+          <input
+            type="text"
+            id="coverageInput"
+            class="coverage-input"
+            placeholder="Nom de votre employeur (ex: Veolia, EDF…)"
+          />
+          <button class="btn btn-primary" id="checkCoverage">Vérifier</button>
+        </div>
+        <div id="coverageResult" class="coverage-result" hidden></div>
+        <p class="coverage-note">
+          Entreprise adhérente ? Premier appel <strong class="text-green">offert</strong> ·
+          Sans abonnement : <strong> 99 €</strong> le premier appel · Aucun engagement
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label text-accent">COMMENT ÇA MARCHE</p>
+        <h2 class="section-title">Vous décidez à chaque étape</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card card-step">
+          <span class="step-num text-accent">01</span>
+          <div class="step-icon">📞</div>
+          <h3>Prenez rendez-vous</h3>
+          <p>Un expert analyse votre situation en 45 min. Diagnostic complet, objectifs clarifiés, plan d'action établi.</p>
+          <p class="step-note text-accent">→ 99 € si entreprise non adhérente · Offert si couverte</p>
+        </div>
+        <div class="card card-step">
+          <span class="step-num text-teal">02</span>
+          <div class="step-icon">📋</div>
+          <h3>Votre checklist personnalisée</h3>
+          <p>Chaque tâche de votre projet apparaît. Pour chacune : faire seul, ou déléguer avec le prix affiché avant.</p>
+          <p class="step-note text-teal">→ Zéro surprise · Vous gardez le contrôle total</p>
+        </div>
+        <div class="card card-step">
+          <span class="step-num text-gold">03</span>
+          <div class="step-icon">✅</div>
+          <h3>Avancez à votre rythme</h3>
+          <p>Faites vous-même ce que vous pouvez, déléguez ce qui vous dépasse. L'expert suit l'avancement en temps réel.</p>
+          <p class="step-note text-gold">→ Délégation à la carte · Pas d'abonnement caché</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS SALARIÉ -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label text-accent">TARIFS TRANSPARENTS</p>
+        <h2 class="section-title">Choisissez votre niveau d'accompagnement</h2>
+        <p class="section-sub">Si votre entreprise est adhérente, le premier appel est <strong class="text-green">offert</strong> dans les deux formules.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan card">
+          <p class="plan-sub">Sans entreprise adhérente</p>
+          <h3 class="plan-name">À la carte</h3>
+          <div class="plan-price">
+            <span class="price-amount text-accent">99 €</span>
+            <span class="price-period">/ premier appel</span>
+          </div>
+          <ul class="plan-features">
+            <li>1 appel expert 45 min</li>
+            <li>Diagnostic de votre situation</li>
+            <li>Orientation financements</li>
+            <li>Récapitulatif écrit post-RDV</li>
+            <li>Délégation de tâches en option</li>
+          </ul>
+          <button class="btn btn-primary w-full" onclick="openModal('rdv')">Réserver mon appel →</button>
+        </div>
+        <div class="plan plan-featured card">
+          <div class="plan-badge">LE PLUS POPULAIRE</div>
+          <p class="plan-sub">Suivi complet de votre projet</p>
+          <h3 class="plan-name">Pack Accompagnement</h3>
+          <div class="plan-price">
+            <span class="price-amount text-teal">190 € /mois </span>
+            <span class="price-period">/ par projet</span>
+          </div>
+          <ul class="plan-features">
+            <li>Appels illimités pendant 3 mois</li>
+            <li>Checklist personnalisée & suivi</li>
+            <li>Montage dossier Action Logement</li>
+            <li>Délégation à la carte incluse</li>
+            <li>Accès plateforme & documents</li>
+          </ul>
+          <button class="btn btn-teal w-full" onclick="openModal('pack')">Démarrer mon projet →</button>
+        </div>
+      </div>
+      <p class="pricing-note">
+        💡 Votre entreprise n'est pas adhérente ?
+        <a href="entreprise.html" class="link-accent">Suggérez-leur Timonia</a>
+        — si elle souscrit, votre prochain appel devient gratuit.
+      </p>
+    </div>
+  </section>
+
+  <!-- CAS D'USAGE -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label text-accent">VOS PROJETS DE VIE</p>
+        <h2 class="section-title">On vous accompagne sur tout</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card card-usecase" onclick="window.location='dashboard.html#achat'">
+          <div class="usecase-icon accent-bg">🏠</div>
+          <h3>Recherche Logement </h3>
+          <p> A la location ou à l'achat, nous vous aidons à trouver votre future logement: démarche administrative, financement... - Zéro case oubliée.</p>
+          <div class="tags">
+            <span class="tag tag-accent">PTZ</span>
+            <span class="tag tag-accent">Courtage</span>
+            <span class="tag tag-accent">Compromis</span>
+          </div>
+        </div>
+        <div class="card card-usecase" onclick="window.location='dashboard.html#renovation'">
+          <div class="usecase-icon teal-bg">🔧</div>
+          <h3> Rénovation énergétique </h3>
+          <p> Des petits travaux à la passoire energetique? On vous aide à établir le cahier des charges et à coordonner les artisans.</p>
+          <div class="tags">
+            <span class="tag tag-teal">MaPrimeRénov'</span>
+            <span class="tag tag-teal">CEE</span>
+            <span class="tag tag-teal">Travaux</span>
+          </div>
+        </div>
+        <div class="card card-usecase" onclick="window.location='dashboard.html#location'">
+          <div class="usecase-icon gold-bg">🏘️</div>
+          <h3>Mise en location</h3>
+          <p>Checklist complète, bail conforme loi ALUR, délégation à la carte. La conformité sans stress.</p>
+          <div class="tags">
+            <span class="tag tag-gold">Diagnostics</span>
+            <span class="tag tag-gold">Bail ALUR</span>
+            <span class="tag tag-gold">LOCA-PASS</span>
+          </div>
+        </div>
+        <div class="card card-usecase" onclick="window.location='dashboard.html#vente'">
+          <div class="usecase-icon purple-bg">💰</div>
+          <h3>Mise en vente</h3>
+          <p>Estimation, diagnostics obligatoires, marketing immobilier et suivi du compromis.</p>
+          <div class="tags">
+            <span class="tag tag-purple">Diagnostics</span>
+            <span class="tag tag-purple">Home staging</span>
+            <span class="tag tag-purple">Notaire</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÉMOIGNAGES -->
+  <section class="section section-tinted">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;margin-bottom:2.5rem;">Ce qu'ils en disent</h2>
+      <div class="grid-3">
+        <div class="card card-testimonial">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"En 3 semaines j'avais mon appartement, le MOBILI-PASS déposé et le notaire coordiné. Seule j'aurais mis 3 mois."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SM</div>
+            <div>
+              <p class="author-name">Sophie M.</p>
+              <p class="author-role">Ingénieure, mutée Lyon</p>
+            </div>
+          </div>
+        </div>
+        <div class="card card-testimonial">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"J'ai délégué les devis et le dossier MaPrimeRénov'. 8 200 € d'aides récupérées que j'aurais ratées."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">DR</div>
+            <div>
+              <p class="author-name">David R.</p>
+              <p class="author-role">Cadre, rénovation Bordeaux</p>
+            </div>
+          </div>
+        </div>
+        <div class="card card-testimonial">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"La checklist avec les prix avant de déléguer, c'est ce qui m'a convaincu. Zéro surprise."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">ML</div>
+            <div>
+              <p class="author-name">Marie L.</p>
+              <p class="author-role">Directrice, vente Paris</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section cta-section">
+    <div class="container text-center">
+      <h2 class="cta-title">Votre projet commence<br /><span class="gradient-text">par un appel de 45 min.</span></h2>
+      <p class="cta-sub">Vérifiez si votre entreprise est adhérente — sinon, 99 € et aucun engagement.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary btn-lg" onclick="openModal('rdv')">Réserver mon appel →</button>
+        <a href="entreprise.html" class="btn btn-outline btn-lg">Mon entreprise n'est pas adhérente</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="index.html">Pour les salariés</a>
+        <a href="entreprise.html">Pour les entreprises</a>
+        <a href="dashboard.html">Mon espace</a>
+        <a href="#">Mentions légales</a>
+        <a href="mailto:contact@timonia.fr">contact@timonia.fr</a>
+      </div>
+      <p class="footer-copy">© 2025 Timonia · Partenaire Action Logement certifié</p>
+    </div>
+  </footer>
+
+  <!-- MODAL RDV -->
+  <div class="modal-bg" id="modalRdv" hidden>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Réserver mon appel expert</h2>
+          <p class="modal-sub"> 99 € si votre entreprise n'est pas adhérente</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('rdv')">✕</button>
+      </div>
+      <div class="modal-notice">
+        💡 Entreprise adhérente ? Cet appel est <strong>offert</strong>. On vérifiera avec vous.
+      </div>
+      <form id="formRdv" class="modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom & Nom</label>
+            <input type="text" placeholder="Thomas Mercier" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="t.mercier@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Votre employeur (optionnel)</label>
+          <input type="text" placeholder="Veolia, EDF, SNCF…" />
+        </div>
+        <div class="form-group">
+          <label>Votre projet</label>
+          <select>
+            <option value="">Sélectionner…</option>
+            <option>Mobilité professionnelle</option>
+            <option>Achat immobilier</option>
+            <option>Rénovation énergétique</option>
+            <option>Location / Gestion locative</option>
+            <option>Mise en vente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Contexte rapide</label>
+          <textarea rows="2" placeholder="Ex: Muté à Lyon en septembre, budget 420k€…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-full">Confirmer mon RDV → 99 €</button>
+        <p class="form-note">Si votre entreprise est adhérente, le paiement ne sera pas prélevé.</p>
+      </form>
+      <div class="form-success" id="successRdv" hidden>
+        <div class="success-icon">✅</div>
+        <h3>C'est confirmé !</h3>
+        <p>Un expert Timonia vous rappelle sous 24h pour fixer le créneau.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PACK -->
+  <div class="modal-bg" id="modalPack" hidden>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Pack Accompagnement</h2>
+          <p class="modal-sub"> 190€/ mois · Suivi complet 3 mois</p>
+        </div>
+        <button class="modal-close" onclick="closeModal('pack')">✕</button>
+      </div>
+      <div class="modal-notice">
+        💡 Entreprise adhérente ? Cet appel est <strong>offert</strong>. On vérifiera avec vous.
+      </div>
+      <form id="formPack" class="modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom & Nom</label>
+            <input type="text" placeholder="Thomas Mercier" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="t.mercier@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Votre employeur (optionnel)</label>
+          <input type="text" placeholder="Veolia, EDF, SNCF…" />
+        </div>
+        <div class="form-group">
+          <label>Votre projet</label>
+          <select>
+            <option value="">Sélectionner…</option>
+            <option>Mobilité professionnelle</option>
+            <option>Achat immobilier</option>
+            <option>Rénovation énergétique</option>
+            <option>Location / Gestion locative</option>
+            <option>Mise en vente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Contexte rapide</label>
+          <textarea rows="2" placeholder="Ex: Muté à Lyon en septembre, budget 420k€…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-teal w-full">Démarrer mon accompagnement →</button>
+        <p class="form-note">Si votre entreprise est adhérente, le paiement ne sera pas prélevé.</p>
+      </form>
+      <div class="form-success" id="successPack" hidden>
+        <div class="success-icon">✅</div>
+        <h3>C'est confirmé !</h3>
+        <p>Un expert Timonia vous rappelle sous 24h pour fixer le créneau.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/salarie.js"></script>
+</body>
+</html>
