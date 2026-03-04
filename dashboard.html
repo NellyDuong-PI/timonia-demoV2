@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ImmoSuivi — Gestion de Projets Immobiliers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --cream: #f8f5f0;
+    --warm: #e8e0d5;
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --sage: #6b8f71;
+    --sage-light: #a8c5ac;
+    --terracotta: #c4704a;
+    --terracotta-light: #e8b49a;
+    --sky: #4a7fa5;
+    --border: #d8d0c5;
+    --shadow: 0 4px 24px rgba(26,26,46,0.08);
+    --shadow-lg: 0 12px 48px rgba(26,26,46,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--gold); font-style: italic; }
+  .header-sub { font-size: 0.75rem; opacity: 0.5; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
+
+  /* ─── LAYOUT ─── */
+  .app { display: flex; min-height: calc(100vh - 70px); }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    width: 280px;
+    background: white;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .btn-new {
+    width: 100%;
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-new:hover { background: #b8943c; transform: translateY(-1px); }
+
+  .project-list { flex: 1; overflow-y: auto; padding: 12px 0; }
+  .project-item {
+    padding: 14px 20px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .project-item:hover { background: var(--cream); }
+  .project-item.active { border-left-color: var(--gold); background: #fdfaf5; }
+  .project-type-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .project-item-name { font-size: 0.85rem; font-weight: 500; line-height: 1.3; }
+  .project-item-meta { font-size: 0.72rem; color: var(--ink-light); margin-top: 3px; }
+
+  /* ─── MAIN ─── */
+  .main { flex: 1; overflow-y: auto; }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    gap: 16px;
+    color: var(--ink-light);
+    text-align: center;
+    padding: 40px;
+  }
+  .empty-icon { font-size: 4rem; opacity: 0.3; }
+  .empty-state h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--ink); }
+  .empty-state p { max-width: 360px; line-height: 1.6; font-size: 0.9rem; }
+
+  /* ─── PROJECT HEADER ─── */
+  .project-header {
+    background: var(--ink);
+    color: white;
+    padding: 32px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.08;
+  }
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  .project-meta-row {
+    display: flex;
+    gap: 24px;
+    font-size: 0.82rem;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+  .project-meta-row span { display: flex; align-items: center; gap: 6px; }
+
+  /* CTA Buttons */
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-cta.gold { background: var(--gold); color: white; }
+  .btn-cta.gold:hover { background: #b8943c; transform: translateY(-1px); }
+  .btn-cta.outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.4); }
+  .btn-cta.outline:hover { background: rgba(255,255,255,0.1); }
+  .btn-cta.sage { background: var(--sage); color: white; }
+  .btn-cta.sage:hover { background: #5a7d60; }
+  .btn-cta.terracotta { background: var(--terracotta); color: white; }
+  .btn-cta.terracotta:hover { background: #b3633d; }
+
+  /* ─── SUMMARY CARDS ─── */
+  .summary-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-card {
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .summary-card:last-child { border-right: none; }
+  .summary-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-light); margin-bottom: 6px; }
+  .summary-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+  .summary-value.gold { color: var(--terracotta); }
+  .summary-value.green { color: var(--sage); }
+  .summary-sub { font-size: 0.72rem; color: var(--ink-light); margin-top: 4px; }
+
+  /* ─── TABS ─── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: white;
+    padding: 0 32px;
+    gap: 4px;
+  }
+  .tab {
+    padding: 14px 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--ink-light);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ─── TAB CONTENT ─── */
+  .tab-content { padding: 28px 32px; display: none; }
+  .tab-content.active { display: block; }
+
+  /* ─── TASKS ─── */
+  .tasks-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .view-toggle {
+    display: flex;
+    background: var(--warm);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .view-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--ink-light);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .view-btn.active { background: white; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+  .task-table { width: 100%; border-collapse: collapse; }
+  .task-table th {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .task-row {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  .task-row:hover { background: #fdfaf5; }
+  .task-row.done { opacity: 0.55; }
+  .task-row.done .task-name { text-decoration: line-through; }
+  .task-row td { padding: 14px 14px; font-size: 0.83rem; vertical-align: middle; }
+
+  .task-check {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .task-check.checked { background: var(--sage); border-color: var(--sage); color: white; }
+
+  .delegation-select {
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    outline: none;
+  }
+  .delegation-select:focus { border-color: var(--gold); }
+
+  .delegatee-input {
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    width: 130px;
+    outline: none;
+    transition: border 0.15s;
+  }
+  .delegatee-input:focus { border-color: var(--gold); }
+  .delegatee-input.hidden { display: none; }
+
+  .badge-delegation {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .badge-delegation.self { background: #e8f5ec; color: var(--sage); }
+  .badge-delegation.timonia { background: #fef3e2; color: var(--gold); }
+  .badge-delegation.other { background: #f0e8f5; color: #7a5fa5; }
+
+  .price-tag { font-weight: 600; }
+  .price-saving { color: var(--sage); }
+  .price-cost { color: var(--terracotta); }
+
+  .btn-delete {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.15s;
+    font-size: 1rem;
+  }
+  .btn-delete:hover { color: var(--terracotta); }
+
+  .btn-add-task {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--cream);
+    border: 1.5px dashed var(--border);
+    border-radius: 8px;
+    color: var(--ink-light);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-add-task:hover { border-color: var(--gold); color: var(--gold); background: #fdfaf5; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { display: none; }
+  .timeline.active { display: block; }
+  .timeline-month { margin-bottom: 28px; }
+  .timeline-month-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--ink-light);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .timeline-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+  .timeline-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .timeline-line { width: 1px; background: var(--border); flex: 1; min-height: 20px; }
+  .timeline-card {
+    flex: 1;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.82rem;
+  }
+  .timeline-card-title { font-weight: 600; margin-bottom: 4px; }
+  .timeline-card-meta { color: var(--ink-light); font-size: 0.75rem; display: flex; gap: 12px; }
+
+  /* ─── DOCUMENTS ─── */
+  .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+  .doc-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .doc-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .doc-icon { font-size: 2.2rem; margin-bottom: 8px; }
+  .doc-name { font-size: 0.78rem; font-weight: 500; color: var(--ink); }
+  .doc-meta { font-size: 0.7rem; color: var(--ink-light); margin-top: 4px; }
+  .btn-add-doc {
+    background: none;
+    border: 1.5px dashed var(--border);
+    border-radius: 10px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ink-light);
+    font-size: 0.78rem;
+    gap: 8px;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-add-doc:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-add-doc-icon { font-size: 1.5rem; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,46,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalIn 0.25s ease;
+  }
+  @keyframes modalIn { from { opacity:0; transform: scale(0.96) translateY(8px); } to { opacity:1; transform: scale(1) translateY(0); } }
+  .modal-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+  .modal-close {
+    background: var(--warm);
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    transition: all 0.15s;
+  }
+  .modal-close:hover { background: var(--border); }
+  .modal-body { padding: 24px 32px; }
+  .modal-footer { padding: 20px 32px; border-top: 1px solid var(--border); display: flex; gap: 12px; justify-content: flex-end; }
+
+  .form-group { margin-bottom: 18px; }
+  .form-label { font-size: 0.78rem; font-weight: 600; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 7px; display: block; }
+  .form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    background: white;
+    outline: none;
+    transition: border 0.15s;
+  }
+  .form-control:focus { border-color: var(--gold); }
+  textarea.form-control { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .type-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .type-option {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+  .type-option:hover { border-color: var(--gold); }
+  .type-option.selected { border-color: var(--gold); background: #fdfaf5; color: var(--gold); }
+  .type-option .type-emoji { font-size: 1.4rem; display: block; margin-bottom: 5px; }
+
+  .btn-primary {
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary:hover { background: #b8943c; }
+  .btn-secondary {
+    background: white;
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--ink-light); }
+
+  /* Types colors */
+  .type-location { --type-color: #4a7fa5; }
+  .type-achat { --type-color: var(--gold); }
+  .type-mise-location { --type-color: var(--sage); }
+  .type-vente { --type-color: var(--terracotta); }
+  .type-renovation { --type-color: #9b6fa5; }
+  .type-autre { --type-color: var(--ink-light); }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--warm);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  /* Responsive */
+  @media (max-width: 800px) {
+    .sidebar { width: 220px; }
+    .summary-strip { grid-template-columns: repeat(2,1fr); }
+    .project-header { padding: 24px 20px; }
+    .tab-content { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Immo<span>Suivi</span></div>
+    <div class="header-sub">Gestion de projets immobiliers</div>
+  </div>
+</header>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Mes Projets</div>
+      <button class="btn-new" onclick="openNewProjectModal()">
+        <span>＋</span> Nouveau projet
+      </button>
+    </div>
+    <div class="project-list" id="projectList"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="mainContent">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">🏡</div>
+      <h2>Bienvenue sur ImmoSuivi</h2>
+      <p>Créez votre premier projet immobilier pour commencer le suivi de vos actions, budgets et documents.</p>
+      <button class="btn-primary" style="margin-top:8px" onclick="openNewProjectModal()">Créer un projet</button>
+    </div>
+    <div id="projectView" style="display:none"></div>
+  </main>
+</div>
+
+<!-- ─── MODAL NOUVEAU PROJET ─── -->
+<div class="modal-overlay" id="newProjectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Nouveau Projet</div>
+      <button class="modal-close" onclick="closeModal('newProjectModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Type de projet</label>
+        <div class="type-selector">
+          <div class="type-option" onclick="selectType(this,'location')"><span class="type-emoji">🔍</span>Location</div>
+          <div class="type-option" onclick="selectType(this,'achat')"><span class="type-emoji">🔑</span>Achat</div>
+          <div class="type-option" onclick="selectType(this,'mise-location')"><span class="type-emoji">🏠</span>Mise en location</div>
+          <div class="type-option" onclick="selectType(this,'vente')"><span class="type-emoji">💰</span>Mise en vente</div>
+          <div class="type-option" onclick="selectType(this,'renovation')"><span class="type-emoji">🔨</span>Rénovation</div>
+          <div class="type-option" onclick="selectType(this,'autre')"><span class="type-emoji">📋</span>Autre</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description du projet</label>
+        <textarea class="form-control" id="proj-desc" placeholder="Décrivez votre projet..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Objectif</label>
+        <input class="form-control" id="proj-objectif" placeholder="Quel est votre objectif principal ?">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Adresse</label>
+        <input class="form-control" id="proj-adresse" placeholder="Adresse du bien ou zone de recherche">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Deadline</label>
+          <input class="form-control" type="date" id="proj-deadline">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Budget (€)</label>
+          <input class="form-control" type="number" id="proj-budget" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('newProjectModal')">Annuler</button>
+      <button class="btn-primary" onclick="createProject()">Créer le projet</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MODAL APPEL / RDV ─── -->
+<div class="modal-overlay" id="rdvModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Contacter l'Expert</div>
+      <button class="modal-close" onclick="closeModal('rdvModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; gap:16px; flex-direction:column">
+        <div style="background:var(--cream); border-radius:12px; padding:20px; text-align:center; cursor:pointer" onclick="alert('Appel en cours...')">
+          <div style="font-size:2.5rem; margin-bottom:8px">📞</div>
+          <div style="font-weight:600; font-size:1rem; margin-bottom:4px">Appeler maintenant</div>
+          <div style="color:var(--ink-light); font-size:0.82rem">+33 1 XX XX XX XX — Disponible 9h-19h</div>
+        </div>
+        <div style="background:var(--cream); border-radius:12px; padding:20px; text-align:center; cursor:pointer" onclick="alert('Redirection vers le calendrier de prise de RDV...')">
+          <div style="font-size:2.5rem; margin-bottom:8px">📅</div>
+          <div style="font-weight:600; font-size:1rem; margin-bottom:4px">Prendre un rendez-vous</div>
+          <div style="color:var(--ink-light); font-size:0.82rem">Consultation gratuite de 30 minutes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MODAL ACCOMPAGNEMENT ─── -->
+<div class="modal-overlay" id="accompModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Comment puis-je vous aider ?</div>
+      <button class="modal-close" onclick="closeModal('accompModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; gap:14px; flex-direction:column">
+        <div style="border:1.5px solid var(--sage-light); border-radius:12px; padding:22px; cursor:pointer; transition: box-shadow 0.15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="alert('Redirection vers les formations & coachings disponibles...')">
+          <div style="display:flex; align-items:center; gap:14px">
+            <div style="font-size:2.2rem">🎓</div>
+            <div>
+              <div style="font-weight:600; font-size:0.95rem; color:var(--sage)">Je veux être accompagné(e)</div>
+              <div style="color:var(--ink-light); font-size:0.82rem; margin-top:4px">Formation & coaching personnalisé pour acquérir les compétences et avancer en autonomie accompagnée.</div>
+            </div>
+          </div>
+        </div>
+        <div style="border:1.5px solid var(--gold-light); border-radius:12px; padding:22px; cursor:pointer; transition: box-shadow 0.15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'" onclick="alert('Redirection vers la demande de mandat complet...')">
+          <div style="display:flex; align-items:center; gap:14px">
+            <div style="font-size:2.2rem">🤝</div>
+            <div>
+              <div style="font-weight:600; font-size:0.95rem; color:var(--gold)">Je veux tout déléguer</div>
+              <div style="color:var(--ink-light); font-size:0.82rem; margin-top:4px">Mandat complet — notre équipe s'occupe de A à Z de votre projet immobilier.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let projects = [];
+let currentProjectId = null;
+let selectedType = null;
+
+const typeConfig = {
+  location: { label: 'Recherche Location', emoji: '🔍', color: '#4a7fa5' },
+  achat: { label: 'Recherche Achat', emoji: '🔑', color: '#c9a84c' },
+  'mise-location': { label: 'Mise en Location', emoji: '🏠', color: '#6b8f71' },
+  vente: { label: 'Mise en Vente', emoji: '💰', color: '#c4704a' },
+  renovation: { label: 'Rénovation', emoji: '🔨', color: '#9b6fa5' },
+  autre: { label: 'Autre', emoji: '📋', color: '#4a4a6a' },
+};
+
+// ─── Demo data ───
+function loadDemo() {
+  projects = [
+    {
+      id: 1,
+      type: 'achat',
+      description: 'Recherche d\'un T3 avec balcon dans le 11e ou 12e arrondissement',
+      objectif: 'Acquérir une résidence principale d\'ici septembre',
+      adresse: '75011 - 75012 Paris',
+      deadline: '2025-09-30',
+      budget: 450000,
+      tasks: [
+        { id: 1, name: 'Constituer le dossier bancaire', price: 0, date: '2025-03-15', delegation: 'self', delegatee: '', done: false },
+        { id: 2, name: 'Visites des 5 premiers biens sélectionnés', price: 0, date: '2025-03-28', delegation: 'self', delegatee: '', done: true },
+        { id: 3, name: 'Analyse de la valeur marché', price: 300, date: '2025-04-05', delegation: 'timonia', delegatee: '', done: false },
+        { id: 4, name: 'Négociation et offre d\'achat', price: 500, date: '2025-04-20', delegation: 'timonia', delegatee: '', done: false },
+        { id: 5, name: 'Suivi acte notarial', price: 0, date: '2025-06-10', delegation: 'other', delegatee: 'Me Dupont', done: false },
+      ],
+      documents: [
+        { name: 'Simulation prêt.pdf', type: 'pdf', date: '2025-02-12' },
+        { name: 'Annonces présélectionnées.xlsx', type: 'xls', date: '2025-02-20' },
+      ],
+      nextTaskId: 6,
+    },
+    {
+      id: 2,
+      type: 'renovation',
+      description: 'Rénovation complète d\'un studio de 28m² acheté à Montreuil',
+      objectif: 'Rénover pour mise en location meublée',
+      adresse: '12 rue des Vignerons, 93100 Montreuil',
+      deadline: '2025-07-01',
+      budget: 25000,
+      tasks: [
+        { id: 1, name: 'Devis maçonnerie & plomberie', price: 150, date: '2025-02-25', delegation: 'timonia', delegatee: '', done: true },
+        { id: 2, name: 'Travaux électricité', price: 3200, date: '2025-03-20', delegation: 'other', delegatee: 'Elec Martin', done: false },
+        { id: 3, name: 'Peinture et finitions', price: 0, date: '2025-04-10', delegation: 'self', delegatee: '', done: false },
+      ],
+      documents: [],
+      nextTaskId: 4,
+    }
+  ];
+  renderSidebar();
+  showProject(1);
+}
+
+function renderSidebar() {
+  const list = document.getElementById('projectList');
+  list.innerHTML = '';
+  if (!projects.length) return;
+  projects.forEach(p => {
+    const cfg = typeConfig[p.type] || typeConfig.autre;
+    const div = document.createElement('div');
+    div.className = 'project-item' + (p.id === currentProjectId ? ' active' : '');
+    div.onclick = () => showProject(p.id);
+    div.innerHTML = `
+      <div class="project-type-dot" style="background:${cfg.color}"></div>
+      <div>
+        <div class="project-item-name">${p.description.slice(0,45)}${p.description.length>45?'…':''}</div>
+        <div class="project-item-meta">${cfg.label} · ${formatDeadline(p.deadline)}</div>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function formatDeadline(d) {
+  if (!d) return '—';
+  const date = new Date(d);
+  return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
+}
+
+function formatDate(d) {
+  if (!d) return '—';
+  const date = new Date(d);
+  return date.toLocaleDateString('fr-FR', { day:'2-digit', month:'short' });
+}
+
+function showProject(id) {
+  currentProjectId = id;
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('emptyState').style.display = 'none';
+  const view = document.getElementById('projectView');
+  view.style.display = 'block';
+  renderSidebar();
+  renderProjectView(p, view);
+}
+
+function computeFinance(p) {
+  let coutEngage = 0, economieFaite = 0, coutPrevisionnel = 0, economiePrevue = 0;
+  p.tasks.forEach(t => {
+    if (t.delegation !== 'self') {
+      if (t.done) coutEngage += t.price || 0;
+      else coutPrevisionnel += t.price || 0;
+    } else {
+      if (t.done) economieFaite += t.price || 0;
+      else economiePrevue += t.price || 0;
+    }
+  });
+  return { coutEngage, economieFaite, coutPrevisionnel, economiePrevue };
+}
+
+function renderProjectView(p, container) {
+  const cfg = typeConfig[p.type] || typeConfig.autre;
+  const f = computeFinance(p);
+  const total = p.tasks.length;
+  const done = p.tasks.filter(t => t.done).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+
+  container.innerHTML = `
+  <!-- PROJECT HEADER -->
+  <div class="project-header">
+    <div class="project-badge"><span>${cfg.emoji}</span> ${cfg.label}</div>
+    <div class="project-title">${p.description}</div>
+    <div class="project-meta-row">
+      <span>📍 ${p.adresse || '—'}</span>
+      <span>🎯 ${p.objectif || '—'}</span>
+      <span>⏰ ${formatDeadline(p.deadline)}</span>
+      <span>💶 ${p.budget ? p.budget.toLocaleString('fr-FR') + ' €' : '—'}</span>
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="display:flex; justify-content:space-between; font-size:0.75rem; opacity:0.7; margin-bottom:4px">
+        <span>Avancement</span><span>${done}/${total} tâches · ${pct}%</span>
+      </div>
+      <div class="progress-bar" style="background:rgba(255,255,255,0.15); height:4px">
+        <div class="progress-fill" style="width:${pct}%; background:var(--gold)"></div>
+      </div>
+    </div>
+    <div class="cta-row">
+      <button class="btn-cta gold" onclick="openModal('rdvModal')">📞 Appeler l'expert · RDV</button>
+      <button class="btn-cta sage" onclick="openModal('accompModal')">🎓 Je veux être accompagné(e)</button>
+      <button class="btn-cta terracotta" onclick="openModal('accompModal')">🤝 Tout déléguer</button>
+    </div>
+  </div>
+
+  <!-- SUMMARY STRIP -->
+  <div class="summary-strip">
+    <div class="summary-card">
+      <div class="summary-label">Coûts engagés</div>
+      <div class="summary-value gold">${f.coutEngage.toLocaleString('fr-FR')} €</div>
+      <div class="summary-sub">Tâches déléguées réalisées</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">Économies réalisées</div>
+      <div class="summary-value green">${f.economieFaite.toLocaleString('fr-FR')} €</div>
+      <div class="summary-sub">Tâches "Je fais" terminées</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">Coûts prévisionnels</div>
+      <div class="summary-value" style="color:var(--sky)">${f.coutPrevisionnel.toLocaleString('fr-FR')} €</div>
+      <div class="summary-sub">Délégations à venir</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">Économies à venir</div>
+      <div class="summary-value green">${f.economiePrevue.toLocaleString('fr-FR')} €</div>
+      <div class="summary-sub">Tâches "Je fais" restantes</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab(event,'tab-tasks')">📋 Tâches</div>
+    <div class="tab" onclick="switchTab(event,'tab-docs')">📁 Documents</div>
+  </div>
+
+  <!-- TASKS TAB -->
+  <div class="tab-content active" id="tab-tasks">
+    <div class="tasks-toolbar">
+      <div style="font-size:0.85rem; color:var(--ink-light)">${total} tâche${total>1?'s':''} · ${done} réalisée${done>1?'s':''}</div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="viewList" onclick="switchView('list')">☰ Liste</button>
+        <button class="view-btn" id="viewTimeline" onclick="switchView('timeline')">⏱ Planning</button>
+      </div>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div id="listView">
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th style="width:36px"></th>
+            <th>Tâche</th>
+            <th>Date prévue</th>
+            <th>Délégation</th>
+            <th>Délégué à</th>
+            <th>Prix (€)</th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="taskBody"></tbody>
+      </table>
+      <button class="btn-add-task" onclick="addTask()">＋ Ajouter une tâche</button>
+    </div>
+
+    <!-- TIMELINE VIEW -->
+    <div class="timeline" id="timelineView"></div>
+  </div>
+
+  <!-- DOCS TAB -->
+  <div class="tab-content" id="tab-docs">
+    <div class="doc-grid" id="docGrid"></div>
+    <input type="file" id="fileInput" style="display:none" onchange="addDocument(event)">
+  </div>
+  `;
+
+  renderTasks(p);
+  renderTimeline(p);
+  renderDocs(p);
+}
+
+function renderTasks(p) {
+  const tbody = document.getElementById('taskBody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  const sorted = [...p.tasks].sort((a,b) => (a.date||'') > (b.date||'') ? 1 : -1);
+  sorted.forEach(t => {
+    const tr = document.createElement('tr');
+    tr.className = 'task-row' + (t.done ? ' done' : '');
+    tr.innerHTML = `
+      <td>
+        <div class="task-check ${t.done?'checked':''}" onclick="toggleTask(${p.id},${t.id})">
+          ${t.done ? '✓' : ''}
+        </div>
+      </td>
+      <td class="task-name">${t.name}</td>
+      <td>${formatDate(t.date)}</td>
+      <td>
+        <select class="delegation-select" onchange="changeDelegation(${p.id},${t.id},this)">
+          <option value="self" ${t.delegation==='self'?'selected':''}>✋ Je fais</option>
+          <option value="timonia" ${t.delegation==='timonia'?'selected':''}>⭐ Timonia</option>
+          <option value="other" ${t.delegation==='other'?'selected':''}>👤 Autre</option>
+        </select>
+      </td>
+      <td>
+        <input type="text" class="delegatee-input ${t.delegation==='other'?'':'hidden'}"
+          value="${t.delegatee||''}"
+          placeholder="Nom / contact"
+          onchange="changDelegatee(${p.id},${t.id},this.value)">
+        ${t.delegation==='timonia'?`<span class="badge-delegation timonia">Timonia</span>`:''}
+        ${t.delegation==='self'?`<span class="badge-delegation self">Moi-même</span>`:''}
+      </td>
+      <td>
+        <span class="price-tag ${t.delegation==='self'?'price-saving':'price-cost'}">${t.price?t.price.toLocaleString('fr-FR')+' €':'—'}</span>
+      </td>
+      <td>
+        <button class="btn-delete" onclick="deleteTask(${p.id},${t.id})" title="Supprimer">✕</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // refresh finance
+  const p2 = projects.find(x => x.id === p.id);
+  const f = computeFinance(p2);
+  const cards = [
+    [f.coutEngage, 0],
+    [f.economieFaite, 1],
+    [f.coutPrevisionnel, 2],
+    [f.economiePrevue, 3]
+  ];
+  document.querySelectorAll('.summary-value').forEach((el, i) => {
+    el.textContent = cards[i][0].toLocaleString('fr-FR') + ' €';
+  });
+}
+
+function renderTimeline(p) {
+  const el = document.getElementById('timelineView');
+  if (!el) return;
+  const sorted = [...p.tasks].sort((a,b) => (a.date||'') > (b.date||'') ? 1 : -1);
+  const months = {};
+  sorted.forEach(t => {
+    const key = t.date ? t.date.slice(0,7) : 'Sans date';
+    if (!months[key]) months[key] = [];
+    months[key].push(t);
+  });
+  el.innerHTML = '';
+  Object.entries(months).forEach(([month, tasks]) => {
+    const div = document.createElement('div');
+    div.className = 'timeline-month';
+    const label = month === 'Sans date' ? 'Sans date' : new Date(month+'-01').toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+    div.innerHTML = `<div class="timeline-month-label">${label}</div>`;
+    tasks.forEach((t, i) => {
+      const cfg2 = t.delegation==='timonia' ? {color:'#c9a84c',label:'Timonia'} : t.delegation==='self' ? {color:'#6b8f71',label:'Moi'} : {color:'#9b6fa5',label:t.delegatee||'Autre'};
+      div.innerHTML += `
+        <div class="timeline-item">
+          <div class="timeline-dot-col">
+            <div class="timeline-dot" style="background:${cfg2.color};${t.done?'opacity:0.5':''}"></div>
+            ${i < tasks.length-1 ? '<div class="timeline-line"></div>' : ''}
+          </div>
+          <div class="timeline-card" style="${t.done?'opacity:0.55':''}">
+            <div class="timeline-card-title" style="${t.done?'text-decoration:line-through':''}">
+              ${t.done?'✓ ':''}${t.name}
+            </div>
+            <div class="timeline-card-meta">
+              <span>${formatDate(t.date)}</span>
+              <span style="color:${cfg2.color}">${cfg2.label}</span>
+              ${t.price ? `<span>${t.price.toLocaleString('fr-FR')} €</span>` : ''}
+            </div>
+          </div>
+        </div>`;
+    });
+    el.appendChild(div);
+  });
+}
+
+function renderDocs(p) {
+  const grid = document.getElementById('docGrid');
+  if (!grid) return;
+  const icons = { pdf:'📄', xls:'📊', xlsx:'📊', doc:'📝', docx:'📝', jpg:'🖼', png:'🖼', default:'📎' };
+  grid.innerHTML = '';
+  p.documents.forEach((doc, i) => {
+    const ext = doc.name.split('.').pop().toLowerCase();
+    const icon = icons[ext] || icons.default;
+    const div = document.createElement('div');
+    div.className = 'doc-card';
+    div.innerHTML = `
+      <div class="doc-icon">${icon}</div>
+      <div class="doc-name">${doc.name}</div>
+      <div class="doc-meta">${doc.date || '—'}</div>
+    `;
+    grid.appendChild(div);
+  });
+  const addBtn = document.createElement('button');
+  addBtn.className = 'btn-add-doc';
+  addBtn.innerHTML = `<div class="btn-add-doc-icon">＋</div><div>Ajouter un document</div>`;
+  addBtn.onclick = () => document.getElementById('fileInput').click();
+  grid.appendChild(addBtn);
+}
+
+function addDocument(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const p = projects.find(x => x.id === currentProjectId);
+  if (!p) return;
+  p.documents.push({ name: file.name, type: file.name.split('.').pop(), date: new Date().toLocaleDateString('fr-FR') });
+  renderDocs(p);
+  event.target.value = '';
+}
+
+function toggleTask(projId, taskId) {
+  const p = projects.find(x => x.id === projId);
+  const t = p?.tasks.find(x => x.id === taskId);
+  if (t) { t.done = !t.done; renderTasks(p); renderTimeline(p); }
+}
+
+function changeDelegation(projId, taskId, sel) {
+  const p = projects.find(x => x.id === projId);
+  const t = p?.tasks.find(x => x.id === taskId);
+  if (t) { t.delegation = sel.value; renderTasks(p); }
+}
+
+function changDelegatee(projId, taskId, val) {
+  const p = projects.find(x => x.id === projId);
+  const t = p?.tasks.find(x => x.id === taskId);
+  if (t) t.delegatee = val;
+}
+
+function deleteTask(projId, taskId) {
+  const p = projects.find(x => x.id === projId);
+  if (!p) return;
+  p.tasks = p.tasks.filter(x => x.id !== taskId);
+  renderTasks(p); renderTimeline(p);
+}
+
+function addTask() {
+  const p = projects.find(x => x.id === currentProjectId);
+  if (!p) return;
+  const name = prompt('Nom de la tâche :');
+  if (!name) return;
+  const price = parseFloat(prompt('Prix de délégation (€, laisser 0 si je fais):','0')) || 0;
+  const date = prompt('Date prévue (AAAA-MM-JJ):','') || '';
+  p.tasks.push({ id: p.nextTaskId++, name, price, date, delegation: price>0 ? 'timonia' : 'self', delegatee: '', done: false });
+  renderTasks(p); renderTimeline(p);
+}
+
+function switchTab(e, id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(id)?.classList.add('active');
+}
+
+function switchView(view) {
+  document.getElementById('listView').style.display = view==='list' ? 'block' : 'none';
+  const tl = document.getElementById('timelineView');
+  if (tl) tl.className = 'timeline' + (view==='timeline' ? ' active' : '');
+  document.getElementById('viewList').classList.toggle('active', view==='list');
+  document.getElementById('viewTimeline').classList.toggle('active', view==='timeline');
+}
+
+// ─── Modal ───
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function openNewProjectModal() { openModal('newProjectModal'); selectedType = null; document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected')); }
+
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+
+function selectType(el, type) {
+  selectedType = type;
+  document.querySelectorAll('.type-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function createProject() {
+  const desc = document.getElementById('proj-desc').value.trim();
+  if (!desc) { alert('Veuillez saisir une description.'); return; }
+  if (!selectedType) { alert('Veuillez sélectionner un type de projet.'); return; }
+  const templates = (defaultTasks[selectedType] || []).map((t, i) => ({
+    id: i + 1,
+    name: t.name,
+    price: t.price,
+    date: '',
+    delegation: t.price > 0 ? 'timonia' : 'self',
+    delegatee: '',
+    done: false,
+  }));
+  const p = {
+    id: Date.now(),
+    type: selectedType,
+    description: desc,
+    objectif: document.getElementById('proj-objectif').value,
+    adresse: document.getElementById('proj-adresse').value,
+    deadline: document.getElementById('proj-deadline').value,
+    budget: parseFloat(document.getElementById('proj-budget').value) || 0,
+    tasks: templates,
+    documents: [],
+    nextTaskId: templates.length + 1,
+  };
+  projects.push(p);
+  closeModal('newProjectModal');
+  ['proj-desc','proj-objectif','proj-adresse','proj-deadline','proj-budget'].forEach(id => document.getElementById(id).value='');
+  renderSidebar();
+  showProject(p.id);
+}
+
+// ─── Tâches pré-définies par type de projet ───
+const defaultTasks = {
+  location: [
+    { name: 'Définition des besoins', price: 0 },
+    { name: 'Définition du budget et cahier des charges', price: 0 },
+    { name: 'Préparation du dossier locataire', price: 0 },
+    { name: '💰 Vérification éligibilité aides — Visale (garantie loyers), Loca-Pass (dépôt de garantie), APL/ALS (CAF)', price: 150 },
+    { name: 'Recherche des logements', price: 0 },
+    { name: 'Dépôt des dossiers pour demande de visites', price: 0 },
+    { name: 'Visites', price: 0 },
+    { name: 'Dossier accepté', price: 0 },
+    { name: 'Demande Visale et Loca-Pass', price: 0 },
+    { name: 'Demande APL/ALS auprès de la CAF', price: 0 },
+    { name: 'Signature du bail', price: 0 },
+    { name: 'Entrée dans les lieux', price: 0 },
+  ],
+  achat: [
+    { name: 'Définition des besoins et critères', price: 0 },
+    { name: 'Définition du budget et capacité d\'emprunt', price: 0 },
+    { name: '💰 Vérification éligibilité aides — PTZ (primo-accédant), Aide Action Logement, TVA réduite zone ANRU', price: 200 },
+    { name: 'Simulation et accord de principe bancaire', price: 0 },
+    { name: 'Intégration des aides dans le plan de financement', price: 0 },
+    { name: 'Recherche des biens', price: 0 },
+    { name: 'Sélection et demande de visites', price: 0 },
+    { name: 'Visites', price: 0 },
+    { name: 'Analyse de la valeur marché', price: 300 },
+    { name: 'Offre d\'achat', price: 500 },
+    { name: 'Signature du compromis', price: 0 },
+    { name: 'Obtention du financement (avec PTZ et aides validés)', price: 0 },
+    { name: 'Signature de l\'acte authentique', price: 0 },
+    { name: 'Remise des clés', price: 0 },
+  ],
+  'mise-location': [
+    { name: 'Estimation du loyer marché', price: 200 },
+    { name: '💰 Vérification éligibilité aides — Loc\'Avantages (réduction fiscale), conventionnement ANAH', price: 150 },
+    { name: 'Préparation et mise en valeur du bien (home staging)', price: 0 },
+    { name: 'Réalisation des diagnostics obligatoires (DPE, etc.)', price: 400 },
+    { name: 'Rédaction de l\'annonce et photos', price: 200 },
+    { name: 'Publication de l\'annonce', price: 0 },
+    { name: 'Sélection des candidats', price: 0 },
+    { name: 'Visites', price: 0 },
+    { name: 'Étude des dossiers locataires', price: 150 },
+    { name: 'Rédaction du bail', price: 200 },
+    { name: 'État des lieux d\'entrée', price: 150 },
+    { name: 'Remise des clés', price: 0 },
+  ],
+  vente: [
+    { name: 'Estimation du prix de vente', price: 250 },
+    { name: '💰 Vérification éligibilité aides — Exonération plus-value, abattements fiscaux', price: 200 },
+    { name: 'Préparation et mise en valeur du bien', price: 0 },
+    { name: 'Réalisation des diagnostics obligatoires', price: 500 },
+    { name: 'Rédaction de l\'annonce et photos', price: 250 },
+    { name: 'Publication de l\'annonce', price: 0 },
+    { name: 'Visites', price: 0 },
+    { name: 'Réception et analyse des offres', price: 0 },
+    { name: 'Acceptation d\'une offre', price: 0 },
+    { name: 'Signature du compromis de vente', price: 0 },
+    { name: 'Suivi de la période de rétractation', price: 0 },
+    { name: 'Signature de l\'acte authentique', price: 0 },
+    { name: 'Remise des clés', price: 0 },
+  ],
+  renovation: [
+    { name: 'Définition du projet et des travaux', price: 0 },
+    { name: 'Estimation du budget travaux', price: 200 },
+    { name: '💰 Vérification éligibilité aides — MaPrimeRénov\', Éco-PTZ, CEE, Aide Action Logement travaux, TVA 5,5%, ANAH', price: 250 },
+    { name: 'Constitution des dossiers de demande d\'aides (avant démarrage !)', price: 300 },
+    { name: 'Recherche et mise en concurrence des artisans RGE', price: 0 },
+    { name: 'Obtention des devis', price: 0 },
+    { name: 'Sélection des prestataires', price: 0 },
+    { name: 'Demande de permis / déclaration préalable si nécessaire', price: 0 },
+    { name: 'Suivi du chantier', price: 500 },
+    { name: 'Réception des travaux', price: 0 },
+    { name: 'Transmission des justificatifs pour déblocage des aides', price: 0 },
+    { name: 'Levée des réserves', price: 0 },
+    { name: 'Bilan final et clôture du chantier', price: 0 },
+  ],
+  autre: [],
+};
+
+// ─── Init ───
+loadDemo();
+</script>
+</body>
+</html>
