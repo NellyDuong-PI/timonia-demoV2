@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | Timonia</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* CSS de secours pour garantir l'affichage immédiat */
+        :root {
+            --bg: #fafafa;
+            --surface: #ffffff;
+            --border: rgba(15,23,80,0.08);
+            --text: #0f1729;
+            --muted: #64748b;
+            --accent: #1a56db;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Manrope', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        .login-container {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo { font-weight: 800; color: var(--accent); margin-bottom: 20px; font-size: 1.8rem; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #f4f5f9;
+            box-sizing: border-box; /* Important pour que le 100% ne dépasse pas */
+        }
+
+        .btn-main {
+            background: var(--accent);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-main:hover { opacity: 0.9; transform: translateY(-1px); }
+    </style>
+</head>
+<body class="light-theme">
+
+    <div class="login-container">
+        <div class="logo">Timonia</div>
+        <h1 style="font-size: 1.5rem; margin-bottom: 10px;">Espace Salarié</h1>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 30px;">Connectez-vous pour suivre votre projet.</p>
+
+        <form id="auth-form">
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-size: 0.75rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">Email Professionnel</label>
+                <input type="email" id="email" placeholder="nom@veolia.com" required>
+            </div>
+            <div style="text-align: left; margin-bottom: 25px;">
+                <label style="font-size: 0.75rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">Mot de passe</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-main">Entrer dans mon espace</button>
+        </form>
+
+        <a href="index.html" style="display: block; margin-top: 20px; font-size: 0.8rem; color: var(--muted); text-decoration: none;">← Retour au site</a>
+    </div>
+
+    <script>
+        document.getElementById('auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.innerHTML = "Vérification...";
+            btn.style.opacity = "0.7";
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html"; 
+            }, 800);
+        });
+    </script>
+</body>
+</html>
