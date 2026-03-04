@@ -1,0 +1,182 @@
+
+/* ─── HERO ENTREPRISE ────────────────────────────────────────────────────── */
+.hero-ent {
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0 72px;
+}
+body.light .hero-ent { background: #f0f5ff; }
+body.dark  .hero-ent { background: #07101f; }
+
+.hero-glow-teal {
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(11,165,146,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-ent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-ent-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+.hero-ent-text {}
+.badge-teal {
+  background: var(--teal-l);
+  border: 1px solid rgba(11,165,146,0.25);
+  color: var(--teal);
+}
+.dot-teal { background: var(--teal); }
+
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ─── DASHBOARD PREVIEW ──────────────────────────────────────────────────── */
+.dashboard-preview { padding: 24px; }
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.preview-label { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.preview-sub   { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.live-badge    { background: var(--green-l); color: var(--green); padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+
+.preview-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.kpi-card { background: var(--surf2); border-radius: 11px; padding: 13px 12px; text-align: center; }
+.kpi-val  { font-size: 20px; font-weight: 800; margin-bottom: 2px; }
+.kpi-label{ font-size: 10px; color: var(--muted); font-weight: 600; }
+
+.preview-rows { display: flex; flex-direction: column; }
+.preview-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+}
+.preview-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 800;
+  flex-shrink: 0;
+}
+.av-teal   { background: var(--teal-l);   color: var(--teal); }
+.av-accent { background: var(--accent-l); color: var(--accent); }
+.av-green  { background: var(--green-l);  color: var(--green); }
+
+.preview-info { flex: 1; min-width: 0; }
+.preview-name { font-size: 12px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.preview-role { font-size: 11px; color: var(--muted); }
+.preview-bar-wrap { width: 80px; flex-shrink: 0; }
+.preview-bar  { height: 4px; background: var(--surf3); border-radius: 100px; overflow: hidden; }
+.preview-fill { height: 100%; border-radius: 100px; }
+.preview-pct  { font-size: 11px; font-weight: 800; min-width: 30px; text-align: right; flex-shrink: 0; }
+
+/* ─── ROI ────────────────────────────────────────────────────────────────── */
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 768px) { .roi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .roi-grid { grid-template-columns: 1fr; } }
+
+.roi-card  { padding: 24px; text-align: center; }
+.roi-icon  { font-size: 28px; margin-bottom: 10px; display: block; }
+.roi-val   { font-family: 'Lora', serif; font-size: 28px; margin-bottom: 6px; }
+.roi-label { font-size: 13px; color: var(--muted); }
+
+/* ─── COVERAGE GRID ──────────────────────────────────────────────────────── */
+.coverage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 768px) { .coverage-grid { grid-template-columns: 1fr; } }
+
+.coverage-card {
+  padding: 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.coverage-card.coverage-covered { border-left: 3px solid var(--teal); }
+.coverage-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  background: var(--surf2);
+}
+.coverage-body { flex: 1; }
+.coverage-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.coverage-title-row h3 { font-size: 14px; }
+.coverage-card p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ─── ENTERPRISE PRICING ─────────────────────────────────────────────────── */
+.pricing-grid-ent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .pricing-grid-ent { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+
+/* ─── PARTNERS ───────────────────────────────────────────────────────────── */
+.partners-section {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 0;
+}
+.partners-label {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.partners-list {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.partners-list span { font-size: 15px; font-weight: 800; color: var(--muted); opacity: 0.4; }
+
+/* ─── CTA TEAL ───────────────────────────────────────────────────────────── */
+.cta-section-teal { padding: 72px 0; }
+body.light .cta-section-teal { background: linear-gradient(135deg, #eef3ff, #f0faf8); }
+body.dark  .cta-section-teal { background: linear-gradient(135deg, #07101f, #0a1628); }
+
+.cta-section-teal .cta-title { margin-bottom: 14px; }
+.cta-section-teal .cta-sub { max-width: 600px; margin: 0 auto 30px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+/* ─── EXPERT CARD (modal) ────────────────────────────────────────────────── */
+.expert-card {
+  background: var(--surf2);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.expert-name { font-weight: 800; font-size: 14px; }
+.expert-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.expert-slot { font-size: 13px; font-weight: 800; margin-top: 10px; }
