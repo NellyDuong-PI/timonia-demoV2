@@ -218,6 +218,94 @@ function buildDemoProjects(user) {
       },
     },
 
+    /* ── MISE EN LOCATION ── */
+'mise-location': {
+  type: 'mise-location',
+  description: 'Mise en location studio 35m² — Paris 11e',
+  objectif: 'Louer mon bien rapidement avec un locataire fiable',
+  adresse: '23 rue de la Roquette, 75011 Paris',
+  deadline: '2026-03-01',
+  budget1Label: null,
+  budget1: 0,
+  budget2Label: 'Budget frais & prestations',
+  budget2: 2000,
+  nextMissionId: 25,
+  prestataires: [
+    {
+      id: 1, nom: 'Timonia', type: 'timonia', avatar: '⭐',
+      email: 'contact@timonia.fr', tel: '+33 1 XX XX XX XX',
+      specialite: 'Accompagnement immobilier',
+      missions: ['Estimation loyer', 'Vérif. aides', 'Rédaction bail', 'État des lieux'],
+      coutEngage: 700, coutPrev: 300,
+    },
+  ],
+  notes: [
+    { id: 1, text: 'Diagnostics DPE commandés. Résultat sous 5 jours. Étiquette C attendue.', date: '2026-01-15T10:00:00' },
+  ],
+  nextNoteId: 2,
+  missions: [
+    { id:1,  name:'Estimation du loyer marché',                    type:'mission',    date:'2026-01-05', prix:200,  delegation:'timonia', delegatee:'', done:true,  validated:false },
+    { id:2,  name:'💰 Vérif. éligibilité Loc\'Avantages',         type:'aide',       date:'2026-01-08', prix:150,  delegation:'timonia', delegatee:'', done:true,  validated:false },
+    { id:3,  name:'🎁 Dépôt dossier Loc\'Avantages',             type:'subvention', date:'2026-01-19', prix:0,    delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:4,  name:'💰 Vérif. éligibilité conventionnement ANAH', type:'aide',       date:'2026-01-08', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:5,  name:'🎁 Dépôt dossier conventionnement ANAH',      type:'subvention', date:'2026-01-19', prix:0,    delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:6,  name:'Vérification conformité logement',             type:'mission',    date:'2026-01-08', prix:150,  delegation:'timonia', delegatee:'', done:true,  validated:false },
+    { id:7,  name:'Préparation et home staging',                  type:'mission',    date:'2026-01-12', prix:300,  delegation:'self',    delegatee:'', done:true,  validated:false },
+    { id:8,  name:'Réalisation diagnostics obligatoires DPE',     type:'mission',    date:'2026-01-15', prix:400,  delegation:'other',   delegatee:'Diag Express', done:false, validated:false },
+    { id:9,  name:'Rédaction annonce et photos',                  type:'mission',    date:'2026-01-19', prix:200,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:10, name:'Publication de l\'annonce',                    type:'mission',    date:'2026-01-22', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:11, name:'Sélection des candidats',                      type:'mission',    date:'2026-01-29', prix:100,  delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:12, name:'Visites',                                      type:'mission',    date:'2026-02-02', prix:200,  delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:13, name:'Vérification avis d\'imposition du candidat',  type:'mission',    date:'2026-02-09', prix:100,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:14, name:'Vérification cohérence du dossier',            type:'mission',    date:'2026-02-09', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:15, name:'Vérification des références (appel employeur)',type:'mission',    date:'2026-02-09', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:16, name:'Rédaction du bail',                            type:'mission',    date:'2026-02-16', prix:200,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:17, name:'Vérification assurance habitation locataire',  type:'mission',    date:'2026-02-19', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:18, name:'État des lieux d\'entrée',                     type:'mission',    date:'2026-02-19', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:19, name:'Vérification paiement du loyer',               type:'mission',    date:'2026-02-28', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:20, name:'Remise des clés',                              type:'mission',    date:'2026-02-19', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:21, name:'Souscription assurance PNO',                   type:'mission',    date:'2026-02-19', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+    { id:22, name:'Déclaration revenus locatifs',                 type:'mission',    date:'2026-02-28', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+    { id:23, name:'🤝 Accompagnement gestion de projet Timonia',  type:'subvention', date:'2026-01-05', prix:0,    delegation:'timonia', delegatee:'', done:false, validated:false },
+  ],
+  documents: {
+    sections: [
+      {
+        title: 'Documents du bien',
+        items: [
+          { id:1, name:'Titre de propriété',               status:'done' },
+          { id:2, name:'DPE réalisé',                      status:'waiting' },
+          { id:3, name:'DDT complet',                      status:'waiting' },
+          { id:4, name:'Attestation assurance PNO',        status:'todo' },
+          { id:5, name:'Règlement de copropriété',         status:'done' },
+        ],
+      },
+      {
+        title: 'Documents locataire',
+        items: [
+          { id:6,  name:'Dossier locataire complet',       status:'waiting' },
+          { id:7,  name:'Pièce d\'identité locataire',     status:'waiting' },
+          { id:8,  name:'3 bulletins de salaire locataire',status:'waiting' },
+          { id:9,  name:'Avis d\'imposition locataire',    status:'waiting' },
+          { id:10, name:'Attestation employeur locataire', status:'waiting' },
+        ],
+      },
+      {
+        title: 'Documents contractuels',
+        items: [
+          { id:11, name:'Bail signé (loi ALUR)',                    status:'waiting' },
+          { id:12, name:'État des lieux d\'entrée signé',           status:'waiting' },
+          { id:13, name:'Attestation assurance habitation locataire',status:'waiting' },
+          { id:14, name:'Quittance dépôt de garantie',              status:'waiting' },
+        ],
+      },
+    ],
+    nextDocId: 15,
+    uploaded: [],
+  },
+},
+
+     
     /* ── RÉNOVATION ── */
     renovation: {
       type: 'renovation',
