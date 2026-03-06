@@ -1,4 +1,3 @@
-
 /* ─── HERO ENTREPRISE ────────────────────────────────────────────────────── */
 .hero-ent {
   position: relative;
@@ -24,14 +23,12 @@ body.dark  .hero-ent { background: #07101f; }
 @media (max-width: 900px) {
   .hero-ent-grid { grid-template-columns: 1fr; gap: 36px; }
 }
-.hero-ent-text {}
 .badge-teal {
   background: var(--teal-l);
   border: 1px solid rgba(11,165,146,0.25);
   color: var(--teal);
 }
 .dot-teal { background: var(--teal); }
-
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ─── DASHBOARD PREVIEW ──────────────────────────────────────────────────── */
@@ -52,9 +49,9 @@ body.dark  .hero-ent { background: #07101f; }
   gap: 10px;
   margin-bottom: 16px;
 }
-.kpi-card { background: var(--surf2); border-radius: 11px; padding: 13px 12px; text-align: center; }
-.kpi-val  { font-size: 20px; font-weight: 800; margin-bottom: 2px; }
-.kpi-label{ font-size: 10px; color: var(--muted); font-weight: 600; }
+.kpi-card  { background: var(--surf2); border-radius: 11px; padding: 13px 12px; text-align: center; }
+.kpi-val   { font-size: 20px; font-weight: 800; margin-bottom: 2px; }
+.kpi-label { font-size: 10px; color: var(--muted); font-weight: 600; }
 
 .preview-rows { display: flex; flex-direction: column; }
 .preview-row {
@@ -83,7 +80,7 @@ body.dark  .hero-ent { background: #07101f; }
 .preview-fill { height: 100%; border-radius: 100px; }
 .preview-pct  { font-size: 11px; font-weight: 800; min-width: 30px; text-align: right; flex-shrink: 0; }
 
-/* ─── ROI ────────────────────────────────────────────────────────────────── */
+/* ─── ROI GRID ───────────────────────────────────────────────────────────── */
 .roi-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -166,17 +163,79 @@ body.dark  .hero-ent { background: #07101f; }
 .cta-section-teal { padding: 72px 0; }
 body.light .cta-section-teal { background: linear-gradient(135deg, #eef3ff, #f0faf8); }
 body.dark  .cta-section-teal { background: linear-gradient(135deg, #07101f, #0a1628); }
-
 .cta-section-teal .cta-title { margin-bottom: 14px; }
 .cta-section-teal .cta-sub { max-width: 600px; margin: 0 auto 30px; color: var(--muted); font-size: 15px; line-height: 1.7; }
 
-/* ─── EXPERT CARD (modal) ────────────────────────────────────────────────── */
-.expert-card {
-  background: var(--surf2);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
+/* ─── PLAN FEATURES (shared) ─────────────────────────────────────────────── */
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
 }
+.plan-features li {
+  font-size: 13.5px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.45;
+}
+.plan-features li::before {
+  content: '✓';
+  color: var(--teal);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── PLAN CARD (shared base) ────────────────────────────────────────────── */
+.plan {
+  border-radius: 18px;
+  padding: 28px 24px;
+  background: var(--surf);
+  border: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--shadow); }
+.plan-featured {
+  border-color: var(--accent);
+  background: linear-gradient(145deg, rgba(30,99,240,.04), var(--surf));
+}
+.plan-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff;
+  font-size: 10px; font-weight: 800; letter-spacing: .1em;
+  padding: 3px 12px; border-radius: 20px; white-space: nowrap;
+}
+.plan-name  { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; }
+.plan-price { margin-bottom: 16px; }
+.price-amount { font-size: 2rem; font-weight: 800; }
+.price-period { font-size: 13px; color: var(--muted); }
+.plan-sub   { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+
+/* ─── FOOTER LOGO ────────────────────────────────────────────────────────── */
+.footer-logo { display: flex; justify-content: center; margin-bottom: 16px; }
+.footer-logo img { height: 40px; object-fit: contain; opacity: .9; }
+body.dark .footer-logo img { filter: brightness(0) invert(1); opacity: .8; }
+
+/* ─── EXPERT CARD (modal) ────────────────────────────────────────────────── */
+.expert-card { background: var(--surf2); border-radius: 14px; padding: 16px; margin-bottom: 20px; }
 .expert-name { font-weight: 800; font-size: 14px; }
 .expert-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .expert-slot { font-size: 13px; font-weight: 800; margin-top: 10px; }
+
+/* ─── CTA SECTION (salarie page compat) ──────────────────────────────────── */
+.cta-section { padding: 72px 0; }
+body.light .cta-section { background: linear-gradient(135deg, #eef3ff, #f0f8ff); }
+body.dark  .cta-section { background: linear-gradient(135deg, #07101f, #0a1628); }
+.cta-title { font-family: 'Lora', serif; font-size: clamp(28px,4vw,42px); margin-bottom: 16px; }
+.cta-sub   { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+.cta-btns  { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.cta-micro { margin-top: 16px; font-size: 12px; color: var(--muted); }
