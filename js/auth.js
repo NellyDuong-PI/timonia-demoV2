@@ -88,6 +88,11 @@ function authLogout() {
   window.location.href = 'login.html';
 }
 
+
+function authLogoutOnLoginPage() {
+  sessionStorage.removeItem('timonia_user');
+}
+
 function authRequire() {
   const user = authGetUser();
   if (!user) {
