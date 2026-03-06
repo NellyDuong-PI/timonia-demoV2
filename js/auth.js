@@ -1,6 +1,6 @@
 /* ─── auth.js — Timonia Demo Authentication ─────────────────────────────── */
 
-const DEMO_PASSWORD = 'timonia2026';
+const DEMO_PASSWORD = 'homeinlove2026';
 
 const DEMO_USERS = [
   {
