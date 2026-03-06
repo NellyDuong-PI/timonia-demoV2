@@ -1,11 +1,12 @@
 // ─── ENTREPRISE PAGE LOGIC ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
   setupForm('formDemo', 'successDemo', 'demo');
+  setupNavBurger();
 });
 
 function openModal(name) {
-  const map = { demo: 'modalDemo' };
-  const el  = document.getElementById(map[name]);
+  var map = { demo: 'modalDemo' };
+  var el  = document.getElementById(map[name]);
   if (el) {
     el.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -13,8 +14,8 @@ function openModal(name) {
 }
 
 function closeModal(name) {
-  const map = { demo: 'modalDemo' };
-  const el  = document.getElementById(map[name]);
+  var map = { demo: 'modalDemo' };
+  var el  = document.getElementById(map[name]);
   if (el) {
     el.hidden = true;
     document.body.style.overflow = '';
@@ -22,10 +23,9 @@ function closeModal(name) {
 }
 
 function setupForm(formId, successId, modalName) {
-  const form    = document.getElementById(formId);
-  const success = document.getElementById(successId);
+  var form    = document.getElementById(formId);
+  var success = document.getElementById(successId);
   if (!form) return;
-
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     form.style.display = 'none';
@@ -37,4 +37,14 @@ function setupForm(formId, successId, modalName) {
       form.reset();
     }, 3000);
   });
+}
+
+function setupNavBurger() {
+  var burger = document.getElementById('navBurger');
+  var mobile = document.getElementById('navMobile');
+  if (burger && mobile) {
+    burger.addEventListener('click', function () {
+      mobile.classList.toggle('open');
+    });
+  }
 }
