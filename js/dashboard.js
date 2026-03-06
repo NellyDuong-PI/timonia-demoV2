@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   dashboard.js — Timonia  |  Multi-projet  |  requires auth.js
+   dashboard.js — Home in Love  |  Multi-projet  |  requires auth.js
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ───────────────────────────────────────────────────────── CONFIG ── */
@@ -40,10 +40,10 @@ function buildDemoProjects(user) {
     return d.toISOString().slice(0, 10);
   }
 
-  /* helper : mission Timonia (offerte si partenaire) */
+  /* helper : mission Home in Love (offerte si partenaire) */
   function accomp(date) {
     return {
-      name: '🤝 Accompagnement gestion de projet Timonia',
+      name: '🤝 Accompagnement gestion de projet Home in Love',
       type: user.partenaire ? 'subvention' : 'mission',
       date: date || '2026-01-05',
       prix: user.partenaire ? 0 : 190,
@@ -65,8 +65,8 @@ function buildDemoProjects(user) {
       budget2Label: 'Budget frais & dépôt', budget2: 2500,
       nextMissionId: 28, nextNoteId: 3,
       prestataires: [
-        { id:1, nom:'Timonia', type:'timonia', avatar:'⭐',
-          email:'contact@timonia.fr', tel:'+33 1 XX XX XX XX',
+        { id:1, nom:'Home in Love', type:'timonia', avatar:'⭐',
+          email:'contact@homeinlove.fr', tel:'+33 1 XX XX XX XX',
           specialite:'Accompagnement immobilier',
           missions:['Préparation dossier','Vérif. aides','Dépôt dossiers visites','Signature bail'],
           coutEngage:500, coutPrev:350 }
@@ -140,15 +140,15 @@ function buildDemoProjects(user) {
       budget2Label: 'Budget frais & prestations', budget2: 2000,
       nextMissionId: 25, nextNoteId: 3,
       prestataires: [
-        { id:1, nom:'Timonia', type:'timonia', avatar:'⭐',
-          email:'contact@timonia.fr', tel:'+33 1 XX XX XX XX',
+        { id:1, nom:'Home in Love', type:'timonia', avatar:'⭐',
+          email:'contact@homeinlove.fr', tel:'+33 1 XX XX XX XX',
           specialite:'Accompagnement immobilier',
           missions:['Estimation loyer','Vérif. aides','Étude dossiers','Rédaction bail','État des lieux'],
           coutEngage:700, coutPrev:300 }
       ],
       notes: [
         { id:1, text:'Diagnostics DPE commandés. Résultat sous 5 jours. Étiquette C attendue.', date:'2026-01-15T10:00:00' },
-        { id:2, text:'Annonce rédigée par Timonia. Publication prévue lundi. Photos réalisées ce matin.', date:'2026-01-19T11:30:00' },
+        { id:2, text:'Annonce rédigée par Home in Love. Publication prévue lundi. Photos réalisées ce matin.', date:'2026-01-19T11:30:00' },
       ],
       missions: [
         { id:1,  name:'Estimation du loyer marché',                     type:'mission',    date:'2026-01-05', prix:200,  delegation:'timonia', delegatee:'', done:true,  validated:false },
@@ -211,7 +211,7 @@ function buildDemoProjects(user) {
       budget2Label: 'Budget frais & prestations', budget2: 8000,
       nextMissionId: 25, nextNoteId: 3,
       prestataires: [
-        { id:1, nom:'Timonia', type:'timonia', avatar:'⭐', email:'contact@timonia.fr', tel:'+33 1 XX XX XX XX', specialite:'Accompagnement immobilier', missions:['Estimation','Diagnostics','Annonce','Suivi compromis','Coordination notaire'], coutEngage:950, coutPrev:2150 },
+        { id:1, nom:'Home in Love', type:'timonia', avatar:'⭐', email:'contact@homeinlove.fr', tel:'+33 1 XX XX XX XX', specialite:'Accompagnement immobilier', missions:['Estimation','Diagnostics','Annonce','Suivi compromis','Coordination notaire'], coutEngage:950, coutPrev:2150 },
         { id:2, nom:'Diag Express', type:'other', avatar:'🔧', email:'contact@diagexpress.fr', tel:'05 56 XX XX XX', specialite:'Diagnostics immobiliers', missions:['Diagnostics obligatoires (DDT complet)'], coutEngage:500, coutPrev:0 },
       ],
       notes: [
@@ -278,7 +278,7 @@ function buildDemoProjects(user) {
       budget2Label: null, budget2: 0,
       nextMissionId: 32, nextNoteId: 3,
       prestataires: [
-        { id:1, nom:'Timonia', type:'timonia', avatar:'⭐', email:'contact@timonia.fr', tel:'+33 1 XX XX XX XX', specialite:'Accompagnement & aides', missions:['Estimation budget','Vérif. aides','Validation artisans','Suivi chantier'], coutEngage:750, coutPrev:500 },
+        { id:1, nom:'Home in Love', type:'timonia', avatar:'⭐', email:'contact@homeinlove.fr', tel:'+33 1 XX XX XX XX', specialite:'Accompagnement & aides', missions:['Estimation budget','Vérif. aides','Validation artisans','Suivi chantier'], coutEngage:750, coutPrev:500 },
         { id:2, nom:'Elec Martin', type:'other', avatar:'⚡', email:'martin.elec@gmail.com', tel:'06 12 34 56 78', specialite:'Électricité RGE', missions:['Travaux électricité'], coutEngage:3450, coutPrev:0 },
         { id:3, nom:'Thermo Rénov', type:'other', avatar:'🏗️', email:'contact@thermobrenov.fr', tel:'05 61 XX XX XX', specialite:'Isolation & chauffage RGE', missions:['Isolation combles','Pompe à chaleur'], coutEngage:0, coutPrev:12000 },
       ],
@@ -348,28 +348,146 @@ function buildDemoProjects(user) {
         ]},
       ]},
     },
+    /* ── RECHERCHE ACHAT ── */
+    'achat': {
+      type: 'achat',
+      description: 'Recherche d\'un appartement 3 pièces — Bordeaux',
+      objectif: 'Acheter avant fin 2026 avec un financement optimisé',
+      adresse: 'Bordeaux Chartrons / Caudéran — 33000',
+      deadline: '2026-12-01',
+      budget1Label: 'Budget d\'achat max', budget1: 320000, budget1Suffix: '€',
+      budget2Label: 'Budget frais & prestations', budget2: 5000,
+      nextMissionId: 28, nextNoteId: 3,
+      prestataires: [
+        { id:1, nom:'Home in Love', type:'timonia', avatar:'⭐',
+          email:'contact@homeinlove.fr', tel:'+33 1 XX XX XX XX',
+          specialite:'Accompagnement immobilier',
+          missions:['Simulation prêt','Vérif. aides','Analyse offres','Coordination notaire'],
+          coutEngage:600, coutPrev:800 },
+        { id:2, nom:'Crédit Conseil', type:'other', avatar:'🏦',
+          email:'contact@creditconseil.fr', tel:'05 56 XX XX XX',
+          specialite:'Courtier en financement',
+          missions:['Dossier bancaire','Négociation taux'],
+          coutEngage:0, coutPrev:1500 },
+      ],
+      notes: [
+        { id:1, text:'Visite T3 rue Fondaudège — 68m², DPE C, charges 120€/mois. Prix demandé 295k. Potentiel de négo à 280k.', date:'2026-02-10T16:00:00' },
+        { id:2, text:'Accord de principe Crédit Agricole obtenu. Taux 3,45% sur 20 ans. Mensualité estimée : 1 580€ pour 280k.', date:'2026-01-28T10:30:00' },
+      ],
+      missions: [
+        { id:1,  name:'Définition du projet et cahier des charges',        type:'mission',    date:'2026-01-05', prix:150,  delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:2,  name:'Définition du budget global d\'achat',              type:'mission',    date:'2026-01-05', prix:100,  delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:3,  name:'Simulation de prêt et capacité d\'emprunt',         type:'mission',    date:'2026-01-08', prix:200,  delegation:'timonia', delegatee:'', done:true,  validated:false },
+        { id:4,  name:'💰 Vérif. éligibilité PTZ (Prêt à Taux Zéro)',     type:'aide',       date:'2026-01-08', prix:200,  delegation:'timonia', delegatee:'', done:true,  validated:false },
+        { id:5,  name:'🎁 Dossier PTZ — économie estimée 8 000 €',        type:'subvention', date:'2026-01-15', prix:8000, delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:6,  name:'💰 Vérif. éligibilité Aide Action Logement achat', type:'aide',       date:'2026-01-08', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:7,  name:'🎁 Dossier Aide Action Logement achat',            type:'subvention', date:'2026-01-22', prix:0,    delegation:'self',    delegatee:'', done:false, validated:false },
+        { id:8,  name:'💰 Vérif. éligibilité exonération droits mutation', type:'aide',      date:'2026-01-08', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:9,  name:'Préparation du dossier bancaire',                   type:'mission',    date:'2026-01-12', prix:250,  delegation:'timonia', delegatee:'', done:true,  validated:false },
+        { id:10, name:'Mise en concurrence des banques / courtier',        type:'mission',    date:'2026-01-15', prix:300,  delegation:'other',   delegatee:'Crédit Conseil', done:true, validated:true },
+        { id:11, name:'Obtention accord de principe bancaire',             type:'mission',    date:'2026-01-28', prix:100,  delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:12, name:'Définition des critères de recherche',              type:'mission',    date:'2026-01-08', prix:100,  delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:13, name:'Recherche des biens',                               type:'mission',    date:'2026-01-15', prix:300,  delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:14, name:'Visites',                                           type:'mission',    date:'2026-02-02', prix:200,  delegation:'self',    delegatee:'', done:true,  validated:false },
+        { id:15, name:'Vérification urbanisme et servitudes',              type:'mission',    date:'2026-02-09', prix:150,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:16, name:'Vérification des charges de copropriété',          type:'mission',    date:'2026-02-09', prix:100,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:17, name:'Vérification DPE et diagnostics',                  type:'mission',    date:'2026-02-09', prix:100,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:18, name:'Négociation du prix',                               type:'mission',    date:'2026-02-16', prix:200,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:19, name:'Rédaction et dépôt de l\'offre d\'achat',          type:'mission',    date:'2026-02-23', prix:100,  delegation:'self',    delegatee:'', done:false, validated:false },
+        { id:20, name:'Signature du compromis de vente',                   type:'mission',    date:'2026-03-09', prix:500,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:21, name:'Obtention de l\'offre de prêt définitive',         type:'mission',    date:'2026-03-23', prix:200,  delegation:'self',    delegatee:'', done:false, validated:false },
+        { id:22, name:'Coordination notaire acheteur',                     type:'mission',    date:'2026-04-01', prix:400,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:23, name:'Signature de l\'acte authentique',                  type:'mission',    date:'2026-04-28', prix:500,  delegation:'timonia', delegatee:'', done:false, validated:false },
+        { id:24, name:'Remise des clés et état des lieux',                 type:'mission',    date:'2026-04-28', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+        { id:25, name:'Souscription assurance habitation',                 type:'mission',    date:'2026-04-28', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+        { id:26, name:'Déclaration changement de domicile',                type:'mission',    date:'2026-05-05', prix:50,   delegation:'self',    delegatee:'', done:false, validated:false },
+        Object.assign({ id:27 }, accomp('2026-01-05')),
+      ],
+      documents: { nextDocId:18, uploaded:[], sections:[
+        { title:'Documents personnels', items:[
+          { id:1,  name:'Pièce d\'identité (recto/verso)',          status:'done'    },
+          { id:2,  name:'3 derniers bulletins de salaire',           status:'done'    },
+          { id:3,  name:'Dernier avis d\'imposition',                status:'done'    },
+          { id:4,  name:'3 derniers relevés bancaires',              status:'done'    },
+          { id:5,  name:'Contrat de travail',                        status:'done'    },
+          { id:6,  name:'Justificatif de domicile actuel',           status:'done'    },
+        ]},
+        { title:'Documents financement', items:[
+          { id:7,  name:'Accord de principe bancaire',               status:'done'    },
+          { id:8,  name:'Offre de prêt définitive',                  status:'waiting' },
+          { id:9,  name:'Attestation PTZ',                           status:'done'    },
+          { id:10, name:'Tableau d\'amortissement prévisionnel',     status:'waiting' },
+        ]},
+        { title:'Documents du bien', items:[
+          { id:11, name:'Compromis de vente signé',                  status:'waiting' },
+          { id:12, name:'DDT complet (diagnostics)',                  status:'waiting' },
+          { id:13, name:'DPE du bien',                               status:'waiting' },
+          { id:14, name:'Règlement de copropriété',                  status:'waiting' },
+          { id:15, name:'PV AG des 3 dernières années',              status:'todo'    },
+          { id:16, name:'Relevé charges copropriété',                status:'todo'    },
+        ]},
+        { title:'Documents contractuels', items:[
+          { id:17, name:'Acte authentique d\'achat',                 status:'waiting' },
+        ]},
+      ]},
+    },
   };
 
-  /* Marie Laurent a 2 projets en démo */
+  /* Marie Laurent → mise-location uniquement */
   if (user.email === 'marie@demo.fr') {
-    return [ ALL['mise-location'], ALL['location'] ];
+    return [ ALL['mise-location'] ];
   }
   return [ ALL[user.projetType] || ALL['location'] ];
 }
 
-/* ── Projet vide (nouveau projet utilisateur) ── */
+/* ── Projet vide avec missions prédéfinies selon le type ── */
 function newEmptyProject(type, description, adresse, objectif, deadline) {
+  /* On clone les missions du template correspondant */
+  var template = buildDemoProjects(currentUser).find(function(p){ return p.type === type; });
+  if (!template) {
+    /* Si pas de démo dispo pour ce type, on cherche dans le catalogue complet */
+    var fakeUser = Object.assign({}, currentUser, { projetType: type });
+    var found = buildDemoProjects(fakeUser);
+    template = found[0] || null;
+  }
+
+  var missions   = [];
+  var documents  = { sections: [], nextDocId: 1, uploaded: [] };
+  var prestataires = [];
+  var nextMissionId = 1;
+
+  if (template) {
+    /* Clonage profond des missions */
+    missions = JSON.parse(JSON.stringify(template.missions));
+    /* Remise à zéro de l'état */
+    missions.forEach(function(m) { m.done = false; m.validated = false; });
+    nextMissionId = template.nextMissionId;
+    documents     = JSON.parse(JSON.stringify(template.documents));
+    /* Réinitialise les statuts docs */
+    documents.sections.forEach(function(s) {
+      s.items.forEach(function(i) { i.status = 'todo'; });
+    });
+    documents.uploaded = [];
+    prestataires = JSON.parse(JSON.stringify(template.prestataires));
+  }
+
   return {
     type: type,
     description: description,
     objectif: objectif || '',
     adresse: adresse || '',
     deadline: deadline || '',
-    budget1Label: null, budget1: 0,
-    budget2Label: 'Budget frais & prestations', budget2: 0,
-    nextMissionId: 1, nextNoteId: 1,
-    prestataires: [], notes: [], missions: [],
-    documents: { sections: [], nextDocId: 1, uploaded: [] },
+    budget1Label: template ? template.budget1Label : null,
+    budget1: template ? template.budget1 : 0,
+    budget1Suffix: template ? template.budget1Suffix : '€',
+    budget2Label: template ? template.budget2Label : 'Budget frais & prestations',
+    budget2: template ? template.budget2 : 0,
+    nextMissionId: nextMissionId,
+    nextNoteId: 1,
+    prestataires: prestataires,
+    notes: [],
+    missions: missions,
+    documents: documents,
   };
 }
 
@@ -679,8 +797,8 @@ function getEquivalent(amount, type) {
   var p = proj();
   if (type === 'location')   return { line1: '≈ ' + Math.round(amount / (p.budget1 || 800)) + ' mois de loyer CC économisés', line2: 'ou ' + Math.round(amount / 50) + ' mois d\'abonnements' };
   if (type === 'vente')      return { line1: '≈ économie vs agence classique à 4%', line2: 'soit ' + Math.round(amount / 2400) + ' mois de salaire net' };
-  if (type === 'renovation') return { line1: '≈ aides récupérées grâce à Timonia', line2: 'soit ' + Math.round(amount / 350) + ' mois de remboursement de prêt' };
-  return { line1: '≈ ' + Math.round(amount / 50) + ' mois d\'abonnements', line2: 'économisés grâce à Timonia' };
+  if (type === 'renovation') return { line1: '≈ aides récupérées grâce à Home in Love', line2: 'soit ' + Math.round(amount / 350) + ' mois de remboursement de prêt' };
+  return { line1: '≈ ' + Math.round(amount / 50) + ' mois d\'abonnements', line2: 'économisés grâce à Home in Love' };
 }
 
 function buildDetailHTML(f) {
@@ -710,7 +828,7 @@ function buildDetailHTML(f) {
     svc.forEach(function(s) {
       html += '<div class="detail-service-item"><div class="detail-service-icon">' + (s.done ? '✅' : '⏳') + '</div>'
         + '<div><div class="detail-service-name">' + s.name.replace(/^[🎁🏦🤝]\s*/, '') + '</div>'
-        + '<div class="detail-service-desc">' + (s.done ? 'Obtenu' : 'En cours') + ' · Gratuit' + (s.delegation === 'timonia' ? ' · Timonia' : '') + '</div></div></div>';
+        + '<div class="detail-service-desc">' + (s.done ? 'Obtenu' : 'En cours') + ' · Gratuit' + (s.delegation === 'timonia' ? ' · Home in Love' : '') + '</div></div></div>';
     });
     html += '</div>';
   }
@@ -736,13 +854,31 @@ function editBudget() {
 }
 
 function renderLockedBilan() {
+  var f = calcFinance();
+  /* Affiche la structure avec chiffres floutés */
   document.getElementById('bilanContent').innerHTML =
-    '<div class="locked-cta">' +
-      '<div class="locked-icon">🔒</div>' +
-      '<div class="locked-title">Accédez à votre bilan financier complet</div>' +
-      '<div class="locked-desc">Nos experts ont identifié toutes les aides financières et économies possibles pour votre projet. Sans accompagnement, elles passent souvent inaperçues.</div>' +
-      '<button class="btn btn-primary" onclick="alert(\'Redirection vers les offres Timonia...\')">Démarrer mon accompagnement — 190 €/mois →</button>' +
-      '<div class="locked-note">💡 Votre entreprise est peut-être partenaire — premier appel offert !</div>' +
+    '<div style="position:relative">' +
+      /* Carte synthèse floue */
+      '<div class="synthese-card" style="filter:blur(5px);pointer-events:none;user-select:none">' +
+        '<div class="synthese-row"><div><div class="synthese-label">Ce projet vous coûte</div><div class="synthese-sub">Missions déléguées</div></div><div class="synthese-value cost">− ••• €</div></div>' +
+        '<div class="synthese-row"><div><div class="synthese-label">Vous avez économisé</div><div class="synthese-sub">Missions faites vous-même</div></div><div class="synthese-value saving">+ ••• €</div></div>' +
+        '<div class="synthese-row"><div><div class="synthese-label">Vous avez bénéficié</div><div class="synthese-sub">Aides financières</div></div><div class="synthese-value benefit">+ ••• €</div></div>' +
+      '</div>' +
+      /* Carte trophée floue */
+      '<div class="equiv-card" style="filter:blur(5px);pointer-events:none;user-select:none;margin-top:16px">' +
+        '<div class="equiv-trophy">🏆</div>' +
+        '<div class="equiv-title">Votre gain total estimé</div>' +
+        '<div class="equiv-amount">+ ••• €</div>' +
+        '<div class="equiv-sub">Nos experts ont identifié des aides pour votre projet</div>' +
+      '</div>' +
+      /* Overlay CTA */
+      '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:32px;text-align:center;background:rgba(var(--bg-rgb,247,248,252),0.7);backdrop-filter:blur(2px);border-radius:18px">' +
+        '<div style="font-size:2rem">🔒</div>' +
+        '<div style="font-family:\'Lora\',serif;font-size:20px;font-weight:600;color:var(--text)">Vos chiffres sont prêts</div>' +
+        '<div style="font-size:14px;color:var(--muted);max-width:340px">Nos experts ont calculé vos économies et aides financières. Déverrouillez pour voir le détail complet.</div>' +
+        '<button class="btn btn-primary" onclick="alert(\'Redirection vers les offres Home in Love...\')">Voir mon bilan complet →</button>' +
+        '<button class="btn btn-outline btn-sm" onclick="alert(\'Vérification partenaire...\')">💡 Mon entreprise est peut-être partenaire</button>' +
+      '</div>' +
     '</div>';
 }
 
@@ -750,27 +886,129 @@ function renderLockedBilan() {
    ONGLET MISSIONS
    ═══════════════════════════════════════════════════════════════════════════ */
 function renderMissions() {
-  if (!currentUser.partenaire) { renderLockedMissions(); return; }
+  if (!currentUser.partenaire) {
+    renderFreeMissions();
+    return;
+  }
   renderMissionList();
   renderMissionTimeline();
 }
 
-function renderLockedMissions() {
-  var rows = [1,2,3,4,5].map(function() {
-    return '<div style="height:44px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 12px;gap:12px">'
-      + [70,40,25,20,15].map(function(w){ return '<div style="height:12px;background:var(--surf3);border-radius:4px;width:' + w + '%"></div>'; }).join('')
-      + '</div>';
-  }).join('');
+/* Non-partenaire : liste vide, saisie libre, CTA en bas */
+/* ── Limites freemium ── */
+var FREEMIUM_LIMITS = { missions: 5, prestataires: 3, documents: 5 };
 
-  document.getElementById('missionsContent').innerHTML =
-    '<div style="filter:blur(5px);pointer-events:none;user-select:none;opacity:0.35;margin-bottom:-80px">' + rows + '</div>' +
-    '<div class="locked-cta">' +
-      '<div class="locked-icon">🔒</div>' +
-      '<div class="locked-title">Débloquez votre checklist complète</div>' +
-      '<div class="locked-desc">' + proj().missions.length + ' étapes identifiées par nos experts — aides financières incluses.</div>' +
-      '<button class="btn btn-primary" onclick="alert(\'Redirection...\')">Démarrer — 190 €/mois →</button>' +
-      '<button class="btn btn-outline" style="margin-top:10px" onclick="alert(\'Vérification...\')">Mon entreprise est peut-être partenaire ?</button>' +
+function freemiumAtLimit(type) {
+  var p = proj();
+  if (type === 'missions')     return p.missions.length >= FREEMIUM_LIMITS.missions;
+  if (type === 'prestataires') return p.prestataires.length >= FREEMIUM_LIMITS.prestataires;
+  if (type === 'documents') {
+    var total = p.documents.sections.reduce(function(acc, s){ return acc + s.items.length; }, 0);
+    return total >= FREEMIUM_LIMITS.documents;
+  }
+  return false;
+}
+
+function freemiumLimitBanner(type, current, max) {
+  var reached = current >= max;
+  return '<div class="freemium-limit-bar' + (reached ? ' reached' : '') + '">' +
+    '<span>' + (reached
+      ? '🔒 Limite atteinte (' + max + '/' + max + ') — passez à l\'offre complète pour continuer'
+      : '📊 ' + current + ' / ' + max + ' ' + type + ' utilisé' + (current > 1 ? 's' : '') + ' — limit freemium') +
+    '</span>' +
+    (reached
+      ? '<button class="btn btn-primary btn-sm" onclick="alert(\'Offres Home in Love...\')">Débloquer →</button>'
+      : '<button class="btn btn-outline btn-sm" onclick="alert(\'Offres Home in Love...\')">Voir l\'offre complète</button>') +
+  '</div>';
+}
+
+function renderFreeMissions() {
+  var content = document.getElementById('missionsContent');
+  var p = proj();
+  var max = FREEMIUM_LIMITS.missions;
+  var count = p.missions.length;
+
+  var toolbar =
+    '<div class="missions-toolbar">' +
+      '<div class="missions-count" id="missionsCount">' +
+        (count === 0 ? 'Aucune mission pour l\'instant'
+          : count + ' mission' + (count > 1 ? 's' : '') + ' ajoutée' + (count > 1 ? 's' : '')) +
+      '</div>' +
     '</div>';
+
+  var limitBar = freemiumLimitBanner('missions', count, max);
+
+  var tableRows = count === 0
+    ? '<tr><td colspan="5" style="text-align:center;padding:40px 0;color:var(--muted);font-size:14px">' +
+        '📋 Commencez par ajouter vos premières missions ci-dessous.<br>' +
+        '<span style="font-size:12px">Nos experts en ont identifié <strong>20 à 30</strong> pour votre type de projet.</span>' +
+      '</td></tr>'
+    : p.missions.slice().sort(function(a,b){
+        return (a.date||'zz') > (b.date||'zz') ? 1 : -1;
+      }).map(function(m) {
+        var ti = MISSION_TYPES[m.type] || MISSION_TYPES['mission'];
+        return '<tr class="mission-row' + (m.done ? ' done' : '') + '">' +
+          '<td><div class="task-check ' + (m.done ? 'checked' : '') + '" onclick="toggleMission(' + m.id + ')">' + (m.done ? '✓' : '') + '</div></td>' +
+          '<td class="mission-name"><input type="text" class="mission-name-input" value="' + m.name.replace(/"/g,'&quot;') + '" onchange="changeName(' + m.id + ',this.value)"></td>' +
+          '<td><select class="type-select ' + ti.color + '" onchange="changeType(' + m.id + ',this)">' +
+            Object.keys(MISSION_TYPES).map(function(k){ return '<option value="' + k + '" ' + (m.type===k?'selected':'') + '>' + MISSION_TYPES[k].label + '</option>'; }).join('') +
+          '</select></td>' +
+          '<td><input type="date" class="date-input" value="' + (m.date || '') + '" onchange="changeDate(' + m.id + ',this.value)"></td>' +
+          '<td><button class="btn-row-delete" onclick="deleteMission(' + m.id + ')">✕</button></td>' +
+        '</tr>';
+      }).join('');
+
+  var addBtn = count < max
+    ? '<button class="btn-add-mission" onclick="addMissionFree()">＋ Ajouter une mission</button>'
+    : '<button class="btn-add-mission" style="opacity:0.4;cursor:not-allowed" disabled>＋ Limite atteinte (' + max + '/' + max + ')</button>';
+
+  var listView =
+    '<div id="listViewWrap">' +
+      '<table class="mission-table">' +
+        '<thead><tr>' +
+          '<th style="width:36px"></th><th>Mission</th><th>Type</th><th>Date prévue</th><th style="width:36px"></th>' +
+        '</tr></thead>' +
+        '<tbody id="missionBody">' + tableRows + '</tbody>' +
+      '</table>' +
+      addBtn +
+    '</div>';
+
+  var cta =
+    '<div class="missions-free-cta">' +
+      '<div class="missions-free-cta-inner">' +
+        '<div class="missions-free-cta-left">' +
+          '<div class="missions-free-cta-title">🚀 Vous manquez peut-être des étapes clés</div>' +
+          '<div class="missions-free-cta-desc">Nos experts ont une checklist complète de <strong>20 à 30 missions</strong> pour votre projet — aides financières incluses. Un appel suffit pour tout découvrir.</div>' +
+        '</div>' +
+        '<div class="missions-free-cta-actions">' +
+          '<button class="btn btn-primary" onclick="alert(\'Prise de RDV...\')">📞 Parler à un expert</button>' +
+          '<button class="btn btn-outline" onclick="alert(\'Offres...\')">Voir les offres</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  content.innerHTML = toolbar + limitBar + listView + cta;
+}
+
+function addMissionFree() {
+  if (freemiumAtLimit('missions')) {
+    alert('Limite de ' + FREEMIUM_LIMITS.missions + ' missions atteinte.\nPassez à l\'offre complète pour ajouter des missions illimitées !');
+    return;
+  }
+  var name = prompt('Nom de la mission :');
+  if (!name) return;
+  var keys = Object.keys(MISSION_TYPES);
+  var tc   = prompt('Type (' + keys.join(' / ') + ') :', 'mission') || 'mission';
+  proj().missions.push({
+    id: proj().nextMissionId++,
+    name: name,
+    type: MISSION_TYPES[tc] ? tc : 'mission',
+    date: '', prix: 0,
+    delegation: 'self', delegatee: '',
+    done: false, validated: false,
+  });
+  renderFreeMissions();
+  renderProjectHeader();
 }
 
 function renderMissionList() {
@@ -789,17 +1027,19 @@ function renderMissionList() {
     tr.className = 'mission-row' + (m.done ? ' done' : '');
     tr.innerHTML =
       '<td><div class="task-check ' + (m.done ? 'checked' : '') + '" onclick="toggleMission(' + m.id + ')">' + (m.done ? '✓' : '') + '</div></td>' +
-      '<td class="mission-name">' + m.name + '</td>' +
-      '<td><span class="type-badge ' + ti.color + '">' + ti.label + '</span></td>' +
+      '<td class="mission-name"><input type="text" class="mission-name-input" value="' + m.name.replace(/"/g, '&quot;') + '" onchange="changeName(' + m.id + ',this.value)" title="Cliquez pour modifier"></td>' +
+      '<td><select class="type-select ' + ti.color + '" onchange="changeType(' + m.id + ',this)">' +
+        Object.keys(MISSION_TYPES).map(function(k){ return '<option value="' + k + '" ' + (m.type === k ? 'selected' : '') + '>' + MISSION_TYPES[k].label + '</option>'; }).join('') +
+      '</select></td>' +
       '<td><input type="date" class="date-input" value="' + (m.date || '') + '" onchange="changeDate(' + m.id + ',this.value)"></td>' +
       '<td><select class="deleg-select" onchange="changeDeleg(' + m.id + ',this)">' +
         '<option value="self"    ' + (m.delegation === 'self'    ? 'selected' : '') + '>✋ Je fais</option>' +
-        '<option value="timonia" ' + (m.delegation === 'timonia' ? 'selected' : '') + '>⭐ Timonia</option>' +
+        '<option value="timonia" ' + (m.delegation === 'timonia' ? 'selected' : '') + '>⭐ Home in Love</option>' +
         '<option value="other"   ' + (m.delegation === 'other'   ? 'selected' : '') + '>👤 Autre</option>' +
       '</select></td>' +
       '<td>' +
         '<input type="text" class="deleg-input ' + (m.delegation === 'other' ? '' : 'hidden') + '" value="' + (m.delegatee || '') + '" placeholder="Qui ?" onchange="changeDelegatee(' + m.id + ',this.value)">' +
-        (m.delegation === 'timonia' && !m.done ? '<span style="font-size:11px;color:var(--accent)">⭐ Timonia</span>' : '') +
+        (m.delegation === 'timonia' && !m.done ? '<span style="font-size:11px;color:var(--accent)">⭐ Home in Love</span>' : '') +
         (m.delegation === 'self'    && !m.done ? '<span style="font-size:11px;color:var(--teal)">✋ Moi</span>'      : '') +
       '</td>' +
       '<td><input type="number" class="price-input ' + (m.validated ? 'validated' : 'estimated') + ' ' + pc + '" value="' + (m.prix || 0) + '" min="0" onchange="changePrice(' + m.id + ',this.value)" title="' + (m.validated ? 'Prix validé ✅' : 'Prix estimatif 💡') + '"></td>' +
@@ -842,7 +1082,7 @@ function renderMissionTimeline() {
 
     missions.forEach(function(m, i) {
       var dc = m.type==='subvention' ? 'var(--green)' : m.type==='aide' ? 'var(--gold)' : m.delegation==='timonia' ? 'var(--accent)' : m.delegation==='self' ? 'var(--teal)' : 'var(--purple)';
-      var dl = m.delegation==='timonia' ? '⭐ Timonia' : m.delegation==='self' ? '✋ Moi' : '👤 ' + (m.delegatee || 'Autre');
+      var dl = m.delegation==='timonia' ? '⭐ Home in Love' : m.delegation==='self' ? '✋ Moi' : '👤 ' + (m.delegatee || 'Autre');
       var ti = MISSION_TYPES[m.type] || MISSION_TYPES['mission'];
       div.innerHTML +=
         '<div class="timeline-item">' +
@@ -894,6 +1134,22 @@ function changePrice(id, val) {
   var m = proj().missions.find(function(x){ return x.id === id; });
   if (m) { m.prix = parseFloat(val) || 0; m.validated = true; renderBilan(); }
 }
+
+function changeName(id, val) {
+  var m = proj().missions.find(function(x){ return x.id === id; });
+  if (m && val.trim()) { m.name = val.trim(); renderMissionTimeline(); }
+}
+function changeType(id, sel) {
+  var m = proj().missions.find(function(x){ return x.id === id; });
+  if (m) {
+    m.type = sel.value;
+    /* Met à jour la couleur du select */
+    var ti = MISSION_TYPES[sel.value] || MISSION_TYPES['mission'];
+    sel.className = 'type-select ' + ti.color;
+    renderBilan();
+  }
+}
+
 function deleteMission(id) {
   proj().missions = proj().missions.filter(function(x){ return x.id !== id; });
   renderMissionList(); renderMissionTimeline(); renderBilan(); renderProjectHeader();
@@ -914,13 +1170,127 @@ function addMission() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   BOUTONS EN-TÊTE — EXPERT & TOUT DÉLÉGUER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Annuaire des experts par entreprise partenaire */
+var EXPERTS = {
+  'Orange':            { nom:'Claire Dupont',    tel:'06 12 34 56 78', specialite:'Recherche locative & achat', avatar:'CD' },
+  'Société Générale':  { nom:'Marc Lefevre',     tel:'06 23 45 67 89', specialite:'Financement & achat immobilier', avatar:'ML' },
+  'SNCF':              { nom:'Sophie Arnaud',    tel:'06 34 56 78 90', specialite:'Mise en location & gestion', avatar:'SA' },
+  'Airbus':            { nom:'Thomas Renard',    tel:'06 45 67 89 01', specialite:'Vente & transaction', avatar:'TR' },
+  'EDF':               { nom:'Julie Martin',     tel:'06 56 78 90 12', specialite:'Rénovation énergétique & aides', avatar:'JM' },
+};
+var EXPERT_DEFAULT = { nom:'Équipe Home in Love',  tel:'01 XX XX XX XX', specialite:'Accompagnement immobilier', avatar:'⭐' };
+
+function openExpertModal() {
+  var expert = (currentUser.entreprise && EXPERTS[currentUser.entreprise]) ? EXPERTS[currentUser.entreprise] : EXPERT_DEFAULT;
+  var isPartner = currentUser.partenaire;
+
+  var m = document.createElement('div');
+  m.className = 'modal-bg'; m.id = 'expertModal';
+  m.innerHTML =
+    '<div class="modal-box" style="max-width:380px;text-align:center">' +
+      '<button class="modal-close" onclick="closeModal(\'expertModal\')" style="position:absolute;top:16px;right:16px">✕</button>' +
+      '<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;margin:0 auto 16px">' + expert.avatar + '</div>' +
+      '<div style="font-family:\'Lora\',serif;font-size:20px;font-weight:600;margin-bottom:4px">' + expert.nom + '</div>' +
+      '<div style="font-size:13px;color:var(--muted);margin-bottom:20px">' + expert.specialite + '</div>' +
+      (isPartner
+        ? '<a href="tel:' + expert.tel.replace(/\s/g,'') + '" class="btn btn-primary w-full" style="display:block;text-decoration:none;margin-bottom:10px">📞 Appeler — ' + expert.tel + '</a>'
+        : '<div style="font-size:13px;color:var(--muted);padding:14px;background:var(--surf2);border-radius:10px;margin-bottom:10px">📞 Numéro disponible avec l\'accompagnement Home in Love</div>') +
+      '<button class="btn btn-outline w-full" onclick="closeModal(\'expertModal\')">Fermer</button>' +
+      (isPartner ? '<div style="font-size:11px;color:var(--muted);margin-top:12px">Expert dédié à ' + (currentUser.entreprise || 'votre entreprise') + '</div>' : '') +
+    '</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click', function(e){ if (e.target === m) closeModal('expertModal'); });
+}
+
+function openDeleguerModal() {
+  var missions = proj().missions.filter(function(m){ return !m.done && m.delegation !== 'timonia'; });
+  var total    = missions.reduce(function(acc, m){ return acc + (m.prix || 0); }, 0);
+
+  var m = document.createElement('div');
+  m.className = 'modal-bg'; m.id = 'deleguerModal';
+  m.innerHTML =
+    '<div class="modal-box" style="max-width:440px">' +
+      '<div class="modal-header">' +
+        '<div><div class="modal-title">🤝 Tout déléguer à Home in Love</div><div class="modal-sub">Home in Love prend en charge toutes vos missions restantes</div></div>' +
+        '<button class="modal-close" onclick="closeModal(\'deleguerModal\')">✕</button>' +
+      '</div>' +
+      '<div style="padding:20px">' +
+        '<div style="background:var(--surf2);border-radius:12px;padding:16px;margin-bottom:20px">' +
+          '<div style="display:flex;justify-content:space-between;margin-bottom:8px">' +
+            '<span style="font-size:13px;color:var(--muted)">Missions à déléguer</span>' +
+            '<span style="font-weight:700">' + missions.length + ' mission' + (missions.length > 1 ? 's' : '') + '</span>' +
+          '</div>' +
+          '<div style="display:flex;justify-content:space-between">' +
+            '<span style="font-size:13px;color:var(--muted)">Coût estimé total</span>' +
+            '<span style="font-weight:700;color:var(--accent)">' + total.toLocaleString('fr-FR') + ' €</span>' +
+          '</div>' +
+        '</div>' +
+        '<div style="font-size:13px;color:var(--muted);margin-bottom:20px">⚠️ Toutes les missions non réalisées seront basculées vers Home in Love. Vous pourrez les modifier individuellement ensuite.</div>' +
+        '<button class="btn btn-primary w-full" onclick="confirmDeleguerAll()" style="margin-bottom:10px">Confirmer la délégation →</button>' +
+        '<button class="btn btn-outline w-full" onclick="closeModal(\'deleguerModal\')">Annuler</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click', function(e){ if (e.target === m) closeModal('deleguerModal'); });
+}
+
+function confirmDeleguerAll() {
+  proj().missions.forEach(function(m) {
+    if (!m.done) { m.delegation = 'timonia'; m.delegatee = ''; }
+  });
+  closeModal('deleguerModal');
+  renderMissionList();
+  renderMissionTimeline();
+  renderBilan();
+  renderProjectHeader();
+  /* Petit feedback visuel */
+  var banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;z-index:9999;box-shadow:0 4px 20px rgba(30,99,240,0.3)';
+  banner.textContent = '✅ Toutes les missions ont été déléguées à Home in Love';
+  document.body.appendChild(banner);
+  setTimeout(function(){ banner.remove(); }, 3000);
+}
+
+function closeModal(id) {
+  var m = document.getElementById(id);
+  if (m) m.remove();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    ONGLET PRESTATAIRES
    ═══════════════════════════════════════════════════════════════════════════ */
 function renderPrestataires() {
   var wrap = document.getElementById('prestContent');
   if (!wrap) return;
   if (!currentUser.partenaire) {
-    wrap.innerHTML = '<div class="locked-cta"><div class="locked-icon">🔒</div><div class="locked-title">Accès réservé aux membres</div><div class="locked-desc">Le carnet de prestataires est disponible avec l\'accompagnement Timonia.</div><button class="btn btn-primary" onclick="alert(\'Redirection...\')">Démarrer — 190 €/mois →</button></div>';
+    var p     = proj();
+    var max   = FREEMIUM_LIMITS.prestataires;
+    var count = p.prestataires.length;
+    wrap.innerHTML = '<div class="prest-grid" id="prestGrid"></div>' + freemiumLimitBanner('prestataires', count, max);
+    var g = document.getElementById('prestGrid');
+    p.prestataires.forEach(function(pr) {
+      var card = document.createElement('div'); card.className = 'prest-card';
+      card.innerHTML =
+        '<div class="prest-card-header"><div class="prest-avatar ' + pr.type + '">' + pr.avatar + '</div>' +
+        '<div><div class="prest-name">' + pr.nom + '</div><div class="prest-type">' + pr.specialite + '</div></div></div>' +
+        '<div class="prest-contacts"><div class="prest-contact">📧 ' + pr.email + '</div><div class="prest-contact">📞 ' + pr.tel + '</div></div>' +
+        '<div class="prest-missions">Missions : ' + pr.missions.join(' · ') + '</div>';
+      g.appendChild(card);
+    });
+    if (count < max) {
+      var ab = document.createElement('button'); ab.className = 'btn-add-prest';
+      ab.innerHTML = '<div style="font-size:1.5rem">＋</div><div>Ajouter un prestataire</div>';
+      ab.onclick = function() { alert('Formulaire ajout prestataire — à développer'); };
+      g.appendChild(ab);
+    } else {
+      var lb = document.createElement('div');
+      lb.className = 'prest-locked-card';
+      lb.innerHTML = '<div style="font-size:1.5rem">🔒</div><div style="font-weight:700;margin-bottom:4px">Limite atteinte</div><div style="font-size:12px;color:var(--muted)">Ajoutez jusqu\'à 20 prestataires avec l\'accompagnement Home in Love</div><button class="btn btn-primary btn-sm" style="margin-top:10px" onclick="alert(\'Offres...\')">Débloquer →</button>';
+      g.appendChild(lb);
+    }
     return;
   }
   wrap.innerHTML = '<div class="prest-grid" id="prestGrid"></div>';
@@ -960,7 +1330,56 @@ function renderDocuments() {
   var wrap = document.getElementById('docsContent');
   if (!wrap) return;
   if (!currentUser.partenaire) {
-    wrap.innerHTML = '<div class="locked-cta"><div class="locked-icon">🔒</div><div class="locked-title">Documents réservés aux membres</div><div class="locked-desc">La checklist documentaire est disponible avec l\'accompagnement Timonia.</div><button class="btn btn-primary" onclick="alert(\'Redirection...\')">Démarrer — 190 €/mois →</button></div>';
+    var p     = proj();
+    var max   = FREEMIUM_LIMITS.documents;
+    var total = p.documents.sections.reduce(function(acc,s){ return acc + s.items.length; }, 0);
+    wrap.innerHTML = '';
+
+    var SC = {
+      todo:    { icon:'⬜', label:'À fournir',  cls:'doc-status-todo'    },
+      waiting: { icon:'⏳', label:'En attente', cls:'doc-status-waiting' },
+      done:    { icon:'✅', label:'Reçu',       cls:'doc-status-done'    },
+    };
+
+    /* Affiche jusqu'à max documents au total */
+    var shown = 0;
+    p.documents.sections.forEach(function(section) {
+      if (shown >= max) return;
+      var visibleItems = section.items.slice(0, max - shown);
+      shown += visibleItems.length;
+
+      var div = document.createElement('div'); div.className = 'doc-section';
+      div.innerHTML = '<div class="doc-section-title">' + section.title + '</div><div class="doc-list"></div>';
+      wrap.appendChild(div);
+      var list = div.querySelector('.doc-list');
+      visibleItems.forEach(function(doc) {
+        var cfg = SC[doc.status] || SC.todo;
+        var item = document.createElement('div'); item.className = 'doc-item';
+        item.innerHTML =
+          '<div class="doc-item-status ' + cfg.cls + '">' + cfg.icon + '</div>' +
+          '<div class="doc-item-name">' + doc.name + '</div>' +
+          '<div class="doc-item-actions">' +
+            '<button class="doc-action-btn" onclick="cycleDocStatus(\'' + section.title.replace(/'/g,"\\'") + '\',' + doc.id + ')">' + cfg.label + '</button>' +
+          '</div>';
+        list.appendChild(item);
+      });
+    });
+
+    /* Barre de limite */
+    var lb = document.createElement('div');
+    lb.innerHTML = freemiumLimitBanner('documents', Math.min(total, max), max);
+    wrap.appendChild(lb);
+
+    if (total >= max) {
+      var lockedDiv = document.createElement('div');
+      lockedDiv.className = 'locked-cta'; lockedDiv.style.marginTop = '16px';
+      lockedDiv.innerHTML =
+        '<div class="locked-icon">🔒</div>' +
+        '<div class="locked-title">Débloquez la checklist complète</div>' +
+        '<div class="locked-desc">Avec l\'accompagnement Home in Love, accédez à la checklist documentaire complète et au suivi de chaque pièce.</div>' +
+        '<button class="btn btn-primary" onclick="alert(\'Offres...\')">Voir l\'offre complète →</button>';
+      wrap.appendChild(lockedDiv);
+    }
     return;
   }
   wrap.innerHTML = '';
@@ -1089,7 +1508,77 @@ function fmtDateTime(d) {
 function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-function toggleDark() {
-  document.body.classList.toggle('dark');
-  document.getElementById('themeBtn').textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODAL — APPELER MON EXPERT
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* Experts rattachés à chaque entreprise partenaire (démo) */
+var EXPERTS_MAP = {
+  'Orange':           { nom:'Camille Rousseau',  tel:'06 12 34 56 78', avatar:'CR', specialite:'Recherche Location & Achat' },
+  'Société Générale': { nom:'Marc Lefebvre',     tel:'06 23 45 67 89', avatar:'ML', specialite:'Achat & Financement' },
+  'SNCF':             { nom:'Isabelle Garnier',  tel:'06 34 56 78 90', avatar:'IG', specialite:'Mise en Location & Gestion' },
+  'Airbus':           { nom:'Nicolas Fontaine',  tel:'06 45 67 89 01', avatar:'NF', specialite:'Vente & Négociation' },
+  'EDF':              { nom:'Sophie Durand',     tel:'06 56 78 90 12', avatar:'SD', specialite:'Rénovation & Aides' },
+};
+var EXPERT_DEFAULT = { nom:'Équipe Home in Love', tel:'01 XX XX XX XX', avatar:'TM', specialite:'Accompagnement immobilier' };
+
+function openExpertModal() {
+  var expert = EXPERTS_MAP[currentUser.entreprise] || EXPERT_DEFAULT;
+  var existing = document.getElementById('expertModal');
+  if (existing) existing.remove();
+
+  var m = document.createElement('div');
+  m.className = 'modal-bg'; m.id = 'expertModal';
+  m.innerHTML =
+    '<div class="modal-box" style="max-width:380px;text-align:center">' +
+      '<div class="modal-header" style="justify-content:flex-end;border:none;padding-bottom:0">' +
+        '<button class="modal-close" onclick="document.getElementById(\'expertModal\').remove()">✕</button>' +
+      '</div>' +
+      '<div style="padding:8px 32px 32px">' +
+        '<div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;margin:0 auto 16px">' + expert.avatar + '</div>' +
+        '<div style="font-family:\'Lora\',serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:4px">' + expert.nom + '</div>' +
+        '<div style="font-size:13px;color:var(--muted);margin-bottom:20px">' + expert.specialite + '</div>' +
+        '<a href="tel:' + expert.tel.replace(/\s/g,'') + '" class="btn btn-primary w-full" style="display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-size:16px">📞 ' + expert.tel + '</a>' +
+        '<div style="font-size:11px;color:var(--muted);margin-top:12px">Disponible du lundi au vendredi, 9h–18h</div>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click', function(e){ if (e.target === m) m.remove(); });
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODAL — TOUT DÉLÉGUER À TIMONIA
+   ═══════════════════════════════════════════════════════════════════════════ */
+function openDeleguerModal() {
+  var missions = proj().missions.filter(function(m){ return !m.done && m.delegation !== 'timonia'; });
+  var cout = missions.reduce(function(acc, m){ return acc + (m.prix || 0); }, 0);
+  var existing = document.getElementById('deleguerModal');
+  if (existing) existing.remove();
+
+  var m = document.createElement('div');
+  m.className = 'modal-bg'; m.id = 'deleguerModal';
+  m.innerHTML =
+    '<div class="modal-box" style="max-width:420px">' +
+      '<div class="modal-header">' +
+        '<div><div class="modal-title">🤝 Tout déléguer à Home in Love</div><div class="modal-sub">Résumé avant confirmation</div></div>' +
+        '<button class="modal-close" onclick="document.getElementById(\'deleguerModal\').remove()">✕</button>' +
+      '</div>' +
+      '<div style="padding:20px 28px 28px;display:flex;flex-direction:column;gap:16px">' +
+        '<div style="background:var(--surf2);border-radius:12px;padding:16px;display:flex;gap:16px">' +
+          '<div style="text-align:center;flex:1"><div style="font-size:24px;font-weight:800;color:var(--accent)">' + missions.length + '</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em">missions</div></div>' +
+          '<div style="width:1px;background:var(--border)"></div>' +
+          '<div style="text-align:center;flex:1"><div style="font-size:24px;font-weight:800;color:var(--red)">− ' + cout.toLocaleString('fr-FR') + ' €</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em">coût estimé</div></div>' +
+        '</div>' +
+        (missions.length === 0
+          ? '<div style="text-align:center;color:var(--muted);padding:12px">✅ Toutes les missions restantes sont déjà déléguées à Home in Love.</div>'
+          : '<div style="font-size:13px;color:var(--muted)">Les ' + missions.length + ' missions restantes seront assignées à ⭐ Home in Love. Vous pouvez modifier chaque mission individuellement après.</div>' +
+            '<div style="display:flex;gap:10px">' +
+              '<button class="btn btn-outline" style="flex:1" onclick="document.getElementById(\'deleguerModal\').remove()">Annuler</button>' +
+              '<button class="btn btn-primary" style="flex:1" onclick="confirmDeleguerTout()">Confirmer →</button>' +
+            '</div>') +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(m);
+  m.addEventListener('click', function(e){ if (e.target === m) m.remove(); });
+}
+
+
