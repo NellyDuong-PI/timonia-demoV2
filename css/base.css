@@ -470,3 +470,7 @@ textarea { resize: vertical; }
 /* ─── UTILS ──────────────────────────────────────────────────────────────── */
 .link-accent { color: var(--accent); font-weight: 700; text-decoration: underline; }
 .link-accent:hover { opacity: 0.8; }
+
+.logo-mark { width:36px;height:36px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center; }
+.logo-mark img { width:100%;height:100%;object-fit:cover; }
+.logo-img { width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0; }
