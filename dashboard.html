@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon projet — Timonia</title>
+<title>Mon projet — Home in Love</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -18,8 +18,7 @@
 <nav class="navbar">
   <div class="nav-inner">
     <a href="index.html" class="logo">
-      <div class="logo-mark">T</div>
-      <div class="logo-text">Timo<span>nia</span></div>
+      <img src="img/hil-logo-round.png" alt="Home in Love" style="width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;">
     </a>
     <div class="nav-user">
       <div class="nav-avatar" id="navAvatar">—</div>
@@ -85,10 +84,10 @@
         <button class="btn-cta btn-cta-primary" onclick="switchTab('tab-bilan')">
           📊 Voir mon bilan
         </button>
-        <button class="btn-cta btn-cta-teal" onclick="alert('Redirection vers la prise de RDV...')">
+        <button class="btn-cta btn-cta-teal" onclick="openExpertModal()">
           📞 Appeler mon expert
         </button>
-        <button class="btn-cta btn-cta-ghost" onclick="alert('Redirection vers les offres...')">
+        <button class="btn-cta btn-cta-ghost" onclick="openDeleguerModal()">
           🤝 Tout déléguer
         </button>
       </div>
