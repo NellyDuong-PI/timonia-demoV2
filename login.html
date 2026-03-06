@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connexion | Timonia</title>
+<title>Connexion | Home in Love</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -225,8 +225,7 @@
 
     <!-- Logo -->
     <div class="login-logo">
-      <div class="login-logo-mark">T</div>
-      <div class="login-logo-text">Timo<span>nia</span></div>
+      <img src="img/hil-logo-round.png" alt="Home in Love" style="width:52px;height:52px;border-radius:50%;object-fit:cover;">
     </div>
 
     <!-- Title -->
@@ -263,7 +262,7 @@
     <div class="demo-hint">
       <div class="demo-hint-title">Comptes de démonstration</div>
       <div class="demo-accounts" id="demoAccounts"></div>
-      <div class="demo-password">Mot de passe : <strong>timonia2026</strong></div>
+      <div class="demo-password">Mot de passe : <strong>homeinlove2026</strong></div>
     </div>
 
   </div>
@@ -271,8 +270,8 @@
 
 <script src="js/auth.js"></script>
 <script>
-// Clear any existing session on login page
-sessionStorage.removeItem('timonia_user');
+  // Redirect if already logged in
+  if (authGetUser()) window.location.href = 'dashboard.html';
 
   // Demo account labels
   const projetLabels = {
