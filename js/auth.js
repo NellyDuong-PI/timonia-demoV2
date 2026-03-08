@@ -1,11 +1,12 @@
 /* ─── auth.js — Timonia Demo Authentication ─────────────────────────────── */
 
-const DEMO_PASSWORD = 'timonia2026';
+const DEMO_PASSWORD = 'homeinlove2026';
 
 const DEMO_USERS = [
   {
     email: 'sophie@demo.fr',
     password: DEMO_PASSWORD,
+    role: 'salarie',
     prenom: 'Sophie',
     nom: 'Martin',
     entreprise: 'Orange',
@@ -16,6 +17,7 @@ const DEMO_USERS = [
   {
     email: 'thomas@demo.fr',
     password: DEMO_PASSWORD,
+    role: 'salarie',
     prenom: 'Thomas',
     nom: 'Bernard',
     entreprise: 'Société Générale',
@@ -26,6 +28,7 @@ const DEMO_USERS = [
   {
     email: 'marie@demo.fr',
     password: DEMO_PASSWORD,
+    role: 'salarie',
     prenom: 'Marie',
     nom: 'Laurent',
     entreprise: 'SNCF',
@@ -36,6 +39,7 @@ const DEMO_USERS = [
   {
     email: 'david@demo.fr',
     password: DEMO_PASSWORD,
+    role: 'salarie',
     prenom: 'David',
     nom: 'Rousseau',
     entreprise: 'Airbus',
@@ -46,6 +50,7 @@ const DEMO_USERS = [
   {
     email: 'pierre@demo.fr',
     password: DEMO_PASSWORD,
+    role: 'salarie',
     prenom: 'Pierre',
     nom: 'Kauffman',
     entreprise: 'EDF',
@@ -56,12 +61,33 @@ const DEMO_USERS = [
   {
     email: 'julie@demo.fr',
     password: DEMO_PASSWORD,
+    role: 'salarie',
     prenom: 'Julie',
     nom: 'Moreau',
     entreprise: null,
     partenaire: false,
     projetType: 'location',
     avatar: 'JM',
+  },
+  /* ── Mandataire ── */
+  {
+    email: 'claire@homeinlove.fr',
+    password: DEMO_PASSWORD,
+    role: 'mandataire',
+    agentId: 'claire',
+    prenom: 'Claire',
+    nom: 'Dupont',
+    avatar: 'CD',
+  },
+  /* ── Admin ── */
+  {
+    email: 'admin@homeinlove.fr',
+    password: DEMO_PASSWORD,
+    role: 'admin',
+    agentId: 'admin',
+    prenom: 'Admin',
+    nom: 'HIL',
+    avatar: 'AH',
   },
 ];
 
@@ -76,6 +102,21 @@ function authLogin(email, password) {
     return user;
   }
   return null;
+}
+
+function authLoginAndRedirect(email, password) {
+  const user = authLogin(email, password);
+  if (!user) return null;
+  if (user.role === 'mandataire' || user.role === 'admin') {
+    window.location.href = 'mandataire.html';
+  } else {
+    window.location.href = 'dashboard.html';
+  }
+  return user;
+}
+
+function authLogoutOnLoginPage() {
+  sessionStorage.removeItem('timonia_user');
 }
 
 function authGetUser() {
