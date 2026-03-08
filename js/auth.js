@@ -1,5 +1,4 @@
-/* ─── auth.js — Timonia Demo Authentication ─────────────────────────────── */
-
+/* ─── auth.js — Home in Love Demo Authentication ─────────────────────────── */
 const DEMO_PASSWORD = 'homeinlove2026';
 
 const DEMO_USERS = [
@@ -69,7 +68,6 @@ const DEMO_USERS = [
     projetType: 'location',
     avatar: 'JM',
   },
-  /* ── Mandataire ── */
   {
     email: 'claire@homeinlove.fr',
     password: DEMO_PASSWORD,
@@ -79,7 +77,6 @@ const DEMO_USERS = [
     nom: 'Dupont',
     avatar: 'CD',
   },
-  /* ── Admin ── */
   {
     email: 'admin@homeinlove.fr',
     password: DEMO_PASSWORD,
@@ -115,10 +112,6 @@ function authLoginAndRedirect(email, password) {
   return user;
 }
 
-function authLogoutOnLoginPage() {
-  sessionStorage.removeItem('timonia_user');
-}
-
 function authGetUser() {
   const raw = sessionStorage.getItem('timonia_user');
   return raw ? JSON.parse(raw) : null;
@@ -127,6 +120,10 @@ function authGetUser() {
 function authLogout() {
   sessionStorage.removeItem('timonia_user');
   window.location.href = 'login.html';
+}
+
+function authLogoutOnLoginPage() {
+  sessionStorage.removeItem('timonia_user');
 }
 
 function authRequire() {
