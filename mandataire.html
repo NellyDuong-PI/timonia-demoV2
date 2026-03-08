@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espace Mandataire — Home in Love</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/mandataire.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="img/hil-logo-round.png" alt="Home in Love" class="logo-img" />
+        <span class="logo-text" style="font-family:'Lora',serif;font-size:17px;">Home in Love</span>
+      </a>
+      <div class="nav-center" id="navUserInfo">
+        <span class="nav-agent-name" id="navAgentName">—</span>
+        <span class="nav-role-badge" id="navRoleBadge">—</span>
+      </div>
+      <div class="nav-right">
+        <button class="btn-theme" id="themeToggle" aria-label="Thème">🌙</button>
+        <button class="btn btn-outline btn-sm" onclick="authLogout()">Déconnexion</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="mand-header">
+    <div class="container">
+      <div class="mand-header-inner">
+        <div>
+          <h1 class="mand-title" id="pageTitle">Mes dossiers</h1>
+          <p class="mand-sub" id="pageSubtitle">Chargement…</p>
+        </div>
+        <div class="mand-header-stats" id="headerStats"></div>
+      </div>
+
+      <!-- FILTRES -->
+      <div class="mand-filters">
+        <div class="filter-group">
+          <span class="filter-label">Statut :</span>
+          <button class="filter-btn active" data-filter="statut" data-val="tous">Tous</button>
+          <button class="filter-btn" data-filter="statut" data-val="actif">🟢 Actif</button>
+          <button class="filter-btn" data-filter="statut" data-val="en_attente">🟠 En attente</button>
+          <button class="filter-btn" data-filter="statut" data-val="non_actif">🔴 Non actif</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Partenariat :</span>
+          <button class="filter-btn active" data-filter="partenaire" data-val="tous">Tous</button>
+          <button class="filter-btn" data-filter="partenaire" data-val="oui">✨ Partenaire</button>
+          <button class="filter-btn" data-filter="partenaire" data-val="non">Non partenaire</button>
+        </div>
+        <!-- Admin uniquement -->
+        <div class="filter-group" id="filterAgent" style="display:none">
+          <span class="filter-label">Agent :</span>
+          <select class="filter-select" id="filterAgentSelect">
+            <option value="tous">Tous les agents</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KANBAN -->
+  <div class="kanban-wrapper">
+    <div class="kanban-board" id="kanbanBoard">
+      <!-- Colonnes générées par JS -->
+    </div>
+  </div>
+
+  <!-- MODAL DÉTAIL DOSSIER -->
+  <div class="modal-bg" id="modalDossier" hidden>
+    <div class="modal-box modal-large">
+      <div class="modal-header">
+        <div>
+          <div class="modal-tag" id="modalDossierTag">Dossier</div>
+          <h2 class="modal-title" id="modalDossierTitle">—</h2>
+          <p class="modal-sub" id="modalDossierSub">—</p>
+        </div>
+        <button class="modal-close" onclick="closeDossierModal()">✕</button>
+      </div>
+      <div class="modal-dossier-body" id="modalDossierBody">
+        <!-- Contenu dynamique -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ASSIGNER (admin) -->
+  <div class="modal-bg" id="modalAssigner" hidden>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <div class="modal-tag" style="background:var(--accent-l);color:var(--accent)">Admin</div>
+          <h2 class="modal-title">Assigner les intervenants</h2>
+          <p class="modal-sub" id="assignerDossierName">—</p>
+        </div>
+        <button class="modal-close" onclick="closeAssignerModal()">✕</button>
+      </div>
+      <div class="assigner-form">
+        <div class="assigner-row">
+          <div class="assigner-icon">🏢</div>
+          <div class="assigner-field">
+            <label>Commercial Lead <span style="font-size:11px;color:var(--muted)">(partenariat entreprise)</span></label>
+            <select id="assignLead" class="filter-select w-full"></select>
+          </div>
+        </div>
+        <div class="assigner-row">
+          <div class="assigner-icon">👤</div>
+          <div class="assigner-field">
+            <label>Commercial Sale <span style="font-size:11px;color:var(--muted)">(a conclu la vente)</span></label>
+            <select id="assignSale" class="filter-select w-full"></select>
+          </div>
+        </div>
+        <div class="assigner-row">
+          <div class="assigner-icon">🏠</div>
+          <div class="assigner-field">
+            <label>Agent en charge <span style="font-size:11px;color:var(--muted)">(suit le dossier)</span></label>
+            <select id="assignAgent" class="filter-select w-full"></select>
+          </div>
+        </div>
+        <div class="assigner-row">
+          <div class="assigner-icon">📋</div>
+          <div class="assigner-field">
+            <label>Colonne Kanban</label>
+            <select id="assignColonne" class="filter-select w-full"></select>
+          </div>
+        </div>
+        <div class="assigner-row">
+          <div class="assigner-icon">⚡</div>
+          <div class="assigner-field">
+            <label>Statut</label>
+            <select id="assignStatut" class="filter-select w-full">
+              <option value="actif">🟢 Actif</option>
+              <option value="en_attente">🟠 En attente</option>
+              <option value="non_actif">🔴 Non actif</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-teal w-full" style="margin-top:8px" onclick="saveAssignment()">Enregistrer →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/mandataire.js"></script>
+</body>
+</html>
