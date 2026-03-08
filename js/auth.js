@@ -64,6 +64,27 @@ const DEMO_USERS = [
     avatar: 'JM',
   },
 ];
+/* ── Mandataire ── */
+  {
+    email: 'claire@homeinlove.fr',
+    password: DEMO_PASSWORD,
+    role: 'mandataire',
+    agentId: 'claire',
+    prenom: 'Claire',
+    nom: 'Dupont',
+    avatar: 'CD',
+  },
+  /* ── Admin ── */
+  {
+    email: 'admin@homeinlove.fr',
+    password: DEMO_PASSWORD,
+    role: 'admin',
+    agentId: 'admin',
+    prenom: 'Admin',
+    nom: 'HIL',
+    avatar: 'AH',
+  },
+];
 
 /* ─── Auth helpers ──────────────────────────────────────────────────────── */
 
@@ -100,4 +121,19 @@ function authRequire() {
     return null;
   }
   return user;
+}
+
+function authLoginAndRedirect(email, password) {
+  const user = authLogin(email, password);
+  if (!user) return null;
+  if (user.role === 'mandataire' || user.role === 'admin') {
+    window.location.href = 'mandataire.html';
+  } else {
+    window.location.href = 'dashboard.html';
+  }
+  return user;
+}
+
+function authLogoutOnLoginPage() {
+  sessionStorage.removeItem('timonia_user');
 }
