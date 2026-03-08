@@ -109,31 +109,3 @@ function authLogout() {
   window.location.href = 'login.html';
 }
 
-
-function authLogoutOnLoginPage() {
-  sessionStorage.removeItem('timonia_user');
-}
-
-function authRequire() {
-  const user = authGetUser();
-  if (!user) {
-    window.location.href = 'login.html';
-    return null;
-  }
-  return user;
-}
-
-function authLoginAndRedirect(email, password) {
-  const user = authLogin(email, password);
-  if (!user) return null;
-  if (user.role === 'mandataire' || user.role === 'admin') {
-    window.location.href = 'mandataire.html';
-  } else {
-    window.location.href = 'dashboard.html';
-  }
-  return user;
-}
-
-function authLogoutOnLoginPage() {
-  sessionStorage.removeItem('timonia_user');
-}
