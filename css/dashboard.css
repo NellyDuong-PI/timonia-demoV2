@@ -606,16 +606,233 @@ body.dark .navbar { background: rgba(8,17,30,0.94); }
 .locked-note { font-size: 11px; color: var(--muted); margin-top: 12px; font-style: italic; }
 
 /* ─── RESPONSIVE ────────────────────────────────────────────────────────── */
+
+/* ── Tablette ── */
 @media (max-width: 900px) {
   .dash-sidebar { width: 220px; }
+  .proj-kpis { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Mobile ── */
 @media (max-width: 700px) {
+
+  /* Shell */
   .app-shell { flex-direction: column; }
-  .dash-sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
-  .proj-header { padding: 20px 16px; }
-  .tab-pane { padding: 16px; }
-  .dash-tabs { padding: 0 12px; }
-  .mission-table { display: block; overflow-x: auto; }
-  .prest-grid { grid-template-columns: 1fr; }
+  .dash-sidebar {
+    width: 100%; height: auto; position: static;
+    border-right: none; border-bottom: 1px solid var(--border);
+    overflow-y: visible;
+  }
+
+  /* Navbar */
+  .nav-inner { padding: 0 14px; gap: 8px; }
+  .logo-text { font-size: 15px; }
   .nav-user-info { display: none; }
+  .nav-partner-badge { display: none; }
+  .btn-logout { padding: 5px 9px; font-size: 11px; }
+  .btn-theme { padding: 5px 8px; font-size: 13px; }
+
+  /* Sidebar compacte */
+  .sidebar-section { padding: 10px 12px 6px; }
+  .sidebar-proj-card { padding: 10px 12px; }
+  .sidebar-proj-name { font-size: 13px; }
+  .sidebar-proj-type { font-size: 11px; }
+
+  /* Entête projet */
+  .proj-header { padding: 16px 14px; }
+  .proj-title  { font-size: 1.2rem; }
+  .proj-meta   { flex-wrap: wrap; gap: 6px; font-size: 11px; }
+  .proj-actions { flex-wrap: wrap; gap: 6px; }
+  .proj-actions .btn { padding: 7px 12px; font-size: 12px; }
+
+  /* KPIs */
+  .proj-kpis { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 12px 14px; }
+  .kpi-value  { font-size: 1.3rem; }
+  .kpi-label  { font-size: 10px; }
+
+  /* Tabs */
+  .dash-tabs  { padding: 0 8px; gap: 2px; overflow-x: auto; }
+  .tab-btn    { padding: 10px 10px; font-size: 11px; white-space: nowrap; }
+  .tab-pane   { padding: 14px 12px; }
+
+  /* ── TABLE MISSIONS → mode carte sur mobile ── */
+  .mission-table        { display: block; }
+  .mission-table thead  { display: none; }
+  .mission-table tbody  { display: flex; flex-direction: column; gap: 10px; }
+  .mission-row          { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px;
+                          background: var(--surf); border: 1px solid var(--border);
+                          border-radius: 12px; border-bottom: none; }
+  .mission-row td       { display: flex; align-items: center; gap: 8px;
+                          padding: 2px 0; font-size: 12px; }
+  .mission-row td::before {
+    content: attr(data-label);
+    font-size: 10px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .06em;
+    min-width: 70px; flex-shrink: 0;
+  }
+  /* Masquer certaines colonnes moins importantes sur mobile */
+  .mission-row td.col-date   { display: none; }
+  .mission-row td.col-delete { justify-content: flex-end; }
+
+  /* Inputs dans tableau */
+  .deleg-select { width: 100%; max-width: 160px; }
+  .price-input  { width: 70px; }
+  .date-input   { width: 110px; }
+  .deleg-input  { width: 90px; }
+
+  /* Bilan synthèse */
+  .synthese-row   { padding: 12px 14px; }
+  .synthese-value { font-size: 16px; }
+  .synthese-label { font-size: 12px; }
+  .equiv-amount   { font-size: 26px; }
+  .budget-amount  { font-size: 22px; }
+
+  /* Prestataires */
+  .prest-grid { grid-template-columns: 1fr; }
+  .prest-card { padding: 14px; }
+
+  /* Documents */
+  .doc-row { flex-wrap: wrap; gap: 6px; }
+
+  /* Modals */
+  .modal-box    { padding: 20px 16px; margin: 12px; border-radius: 18px; max-width: calc(100vw - 24px); }
+  .modal-header { flex-wrap: wrap; gap: 8px; }
+  .modal-title  { font-size: 1.1rem; }
+  .form-row     { flex-direction: column; }
+
+  /* Missions free */
+  .missions-free-cta-inner { flex-direction: column; gap: 14px; }
+  .missions-free-cta-actions { width: 100%; }
+
+  /* Timeline */
+  .tl-card { padding: 8px 10px; font-size: 11px; }
+
+  /* Toolbar missions */
+  .missions-toolbar { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .view-toggle { align-self: flex-end; }
+
+  /* Bannière partenaire */
+  .missions-unlock-banner { flex-direction: column; gap: 10px; text-align: center; }
 }
+
+/* ── Très petit (≤ 380px) ── */
+@media (max-width: 380px) {
+  .tab-btn  { padding: 8px 7px; font-size: 10px; }
+  .proj-kpis { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .modal-box { padding: 16px 12px; }
+}
+
+/* ─── BANNIÈRE NON-PARTENAIRE (missions lisibles) ────────────────────────── */
+.missions-unlock-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, var(--accent-l), var(--teal-l));
+  border: 1px solid rgba(30,99,240,0.15);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* ─── MISSION NAME INPUT INLINE ─────────────────────────────────────────── */
+.mission-name-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed transparent;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text);
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: border-color 0.2s, background 0.2s;
+  min-width: 160px;
+}
+.mission-name-input:hover {
+  border-bottom-color: var(--border);
+  background: var(--surf2);
+}
+.mission-name-input:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+  background: var(--surf2);
+}
+.mission-row.done .mission-name-input {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* ─── TYPE SELECT INLINE ─────────────────────────────────────────────────── */
+.type-select {
+  appearance: none;
+  border: none;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.type-select:hover { opacity: 0.8; }
+.type-select:focus { outline: none; }
+.type-select.type-mission    { background: rgba(30,99,240,0.1);  color: #1e63f0; }
+.type-select.type-aide        { background: rgba(196,122,0,0.1);  color: #c47a00; }
+.type-select.type-subvention  { background: rgba(22,163,74,0.1);  color: #16a34a; }
+
+/* ─── FREEMIUM LIMIT BAR ─────────────────────────────────────────────────── */
+.freemium-limit-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--surf2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.freemium-limit-bar.reached {
+  background: rgba(239,68,68,0.06);
+  border-color: rgba(239,68,68,0.2);
+  color: var(--red);
+}
+
+/* ─── PRESTATAIRE LOCKED CARD ────────────────────────────────────────────── */
+.prest-locked-card {
+  background: var(--surf2);
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: var(--muted);
+  gap: 4px;
+}
+
+/* ─── MISSIONS FREE CTA ──────────────────────────────────────────────────── */
+.missions-free-cta {
+  margin-top: 28px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.missions-free-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(30,99,240,0.05), rgba(11,165,146,0.05));
+  border: 1px solid rgba(30,99,240,0.12);
+  border-radius: 16px;
+  padding: 20px 24px;
+  flex-wrap: wrap;
+}
+.missions-free-cta-left { flex: 1; min-width: 200px; }
+.missions-free-cta-title { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 6px; }
+.missions-free-cta-desc  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.missions-free-cta-actions { display: flex; flex-direction: column; gap: 8px; min-width: 160px; }
