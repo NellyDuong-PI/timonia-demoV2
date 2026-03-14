@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon projet — Home in Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing:border-box;margin:0;padding:0; }
+    body.light { --bg:#f7f8fc;--surf:#fff;--surf2:#f0f2f8;--surf3:#e4e8f2;--border:#e2e6f0;--text:#0d1b2a;--muted:#6b7a99;--accent:#1e63f0;--teal:#0ba592;--teal-l:rgba(11,165,146,.08);--gold:#c47a00; }
+    body.dark  { --bg:#08111e;--surf:#0f1e30;--surf2:#162436;--surf3:#1e3047;--border:#1e3047;--text:#e8edf8;--muted:#7a8fad;--accent:#4d8ef8;--teal:#0ecfb8;--teal-l:rgba(14,207,184,.08);--gold:#f0a500; }
+    body { font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:background .25s,color .25s; }
+  </style>
+  <link rel="stylesheet" href="css/dashboard2.css" />
+</head>
+<body class="light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index2.html" class="logo">
+        <img src="img/hil-logo-round.png" alt="Home in Love" class="logo-img" />
+        <span class="logo-text">Home in Love</span>
+      </a>
+      <div class="nav-user">
+        <div id="navPartnerBadge" class="nav-partner-badge" style="display:none">✨ Partenaire</div>
+        <div class="nav-user-info">
+          <div class="nav-user-name" id="navName">—</div>
+          <div class="nav-user-company" id="navCompany"></div>
+        </div>
+        <div class="nav-avatar" id="navAvatar">—</div>
+        <button class="btn-theme" id="themeToggle">🌙</button>
+        <button class="btn-logout" onclick="authLogout()">Déconnexion</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SHELL -->
+  <div class="app2-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="dash2-sidebar">
+      <div class="sidebar2-header">
+        <div class="sidebar2-title">Mes projets</div>
+        <div class="sidebar2-user" id="sidebarUserName">—</div>
+      </div>
+      <div class="sidebar2-list" id="sidebarProjets"></div>
+      <div class="sidebar2-footer">
+        <a href="index2.html" class="sidebar2-footer-link">🏠 Retour au site</a>
+        <a href="#" class="sidebar2-footer-link" onclick="authLogout()">🚪 Déconnexion</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dash2-main">
+      <div id="mainContent"></div>
+    </main>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard2.js"></script>
+</body>
+</html>
